@@ -2,20 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class MenuController extends Controller
-{
+class MenuController extends Controller {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth');
+        $this->authorize('access-menu');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $menus = Menu::getMenus('sidebar-admin');
+        $targets = Menu::select('module_target')->distinct()->get();
+
+        return view('menu.index', compact('menus', 'targets'));
     }
 
     /**
@@ -23,64 +36,68 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('menu.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request) {
+        $this->validate($request, [
+            'module_target' => 'required|max:40',
+            'body'          => 'required|max:40',
+            'position'      => 'required|max:8',
+            'name'          => 'required|max:40',
+            'type'          => 'required|in:default,separator,parent',
+        ]);
+        Menu::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect('/menu');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Menu $menu) {
+        return view('menu.edit', compact('menu'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Menu $menu) {
+        $this->validate($request, [
+            'module_target' => 'required|max:40',
+            'body'          => 'required|max:40',
+            'position'      => 'required|max:8',
+            'name'          => 'required|max:40',
+            'type'          => 'required|in:default,separator,parent',
+        ]);
+        $menu->update($request->all());
+
+        return redirect('/menu');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Menu $menu) {
+        $menu->delete();
+
+        return redirect('/menu');
     }
 }

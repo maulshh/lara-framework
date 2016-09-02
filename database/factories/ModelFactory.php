@@ -70,6 +70,9 @@ $factory->define(App\Makanan::class, function (Faker\Generator $faker) {
 $factory->define(App\Menu::class, function(){
     return [];
 });
+$factory->define(App\Setting::class, function(){
+    return [];
+});
 $factory->define(App\Users\Role::class, function(){
     return [];
 });

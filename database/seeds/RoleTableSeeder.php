@@ -21,15 +21,18 @@ class RoleTableSeeder extends Seeder {
         }
 
         $permissions = [
-            ['name' => 'edit-all-post', 'label' => 'Edit All Post'],
+            ['name' => 'access-menu', 'label' => 'Access All Menus'],
+            ['name' => 'access-setting', 'label' => 'Access All Settings'],
+            ['name' => 'access-permission', 'label' => 'Access All Permissions'],
+            ['name' => 'access-role', 'label' => 'Access All Roles'],
             ['name' => 'view-dashboard', 'label' => 'Access Dashboard'],
-            ['name' => 'edit-post', 'label' => 'Edit Own Post']
         ];
 
-        foreach ($permissions as $permission) {
-            factory(\App\Users\Permission::class)->create($permission)->each(function ($p) {
-//                $p->roles()->save(App\Users\Role::first());
-            });
+        for ($i = 0; $i < count($permissions); $i++) {
+            $permissions[$i] = factory(\App\Users\Permission::class)->create($permissions[$i]);
+            $permissions[$i]->roles()->save(App\Users\Role::find(1));
         }
+
+        $permissions[3]->roles()->save(App\Users\Role::find(2));
     }
 }

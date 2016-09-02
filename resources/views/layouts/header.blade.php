@@ -2,7 +2,7 @@
 <header class="main-header">
 
     {{-- Logo --}}
-    <a href="" class="logo">
+    <a href="/" class="logo">
         {{-- mini logo for sidebar mini 50x50 pixels --}}
         <span class="logo-mini"><b>L</b>FR</span>
         {{-- logo for regular state and mobile devices --}}
@@ -27,7 +27,7 @@
                         {{-- Menu Toggle Button --}}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{-- The user image in the navbar--}}
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
                             {{-- hidden-xs hides the username on small devices so only the image appears. --}}
                             <span class="hidden-xs">{{ strtoupper(substr($user->username, 0, 1)) . substr($user->username, 1) }}</span>
                         </a>

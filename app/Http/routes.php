@@ -1,26 +1,28 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', function(){
+    return view('home');
+})->middleware('auth');
 
+Route::get('hero/{a?}/{b?}/{c?}', function(){
+    return view('hero');
+})->middleware('auth')->name('hero');
+
+Route::post('permission/{permission}/{role}', 'PermissionController@attachRole');
+Route::delete('permission/{permission}/{role}', 'PermissionController@detachRole');
+
+Route::get('setting/update/{module}', 'SettingController@editValue');
+Route::patch('setting/value', 'SettingController@updateValue');
+
+Route::resource('setting', 'SettingController', ['except' => ['show']]);
 Route::resource('admin', 'AdminController');
 Route::resource('user', 'UserController');
-Route::resource('role', 'RoleController');
-Route::resource('permission', 'PermissionController');
-Route::resource('menu', 'MenuController');
+Route::resource('role', 'RoleController', ['except' => ['show']]);
+Route::resource('permission', 'PermissionController', ['except' => ['show']]);
+Route::resource('menu', 'MenuController', ['except' => ['show']]);

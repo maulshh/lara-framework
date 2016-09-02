@@ -33,7 +33,7 @@ class User extends Authenticatable {
             return $query->where('module_target', $module_target);
         })->whereHas('roles', function ($query) {
             $query->whereIn('id', $this->roles()->lists('id'));
-        })->get();
+        })->orderBy('position')->get();
 
 //        return $this->hasManyThrough(\App\Menu::class, Role::class);
 //        Error because, use 2 pivot table. hasManyThrough shouldn't use any pivot
