@@ -37,6 +37,15 @@ class MenuTableSeeder extends Seeder {
             ],
             [
                 'module_target' => 'sidebar-admin',
+                'position'      => '3',
+                'icon'          => 'group',
+                'name'          => 'user',
+                'uri'           => '/user',
+                'title'         => 'User Management',
+                'body'          => 'Users'
+            ],
+            [
+                'module_target' => 'sidebar-admin',
                 'position'      => '9',
                 'body'          => 'Settings',
                 'type'          => 'separator'
@@ -72,10 +81,15 @@ class MenuTableSeeder extends Seeder {
 
         for ($i = 0; $i < count($menus); $i++) {
             $menus[$i] = factory(\App\Menu::class)->create($menus[$i]);
-            $menus[$i]->roles()->save(App\Users\Role::find(1));
         }
 
-        $menus[0]->roles()->save(App\Users\Role::find(2));
-        $menus[1]->roles()->save(App\Users\Role::find(2));
+        $menus[0]->roles()->save(App\Users\Role::find(3));
+        $menus[1]->roles()->save(App\Users\Role::find(3));
+        $menus[2]->roles()->save(App\Users\Role::find(3));
+        $menus[3]->roles()->save(App\Users\Role::find(2));
+        $menus[4]->roles()->save(App\Users\Role::find(2));
+        $menus[5]->roles()->save(App\Users\Role::find(2));
+        $menus[6]->roles()->save(App\Users\Role::find(1));
+        $menus[7]->roles()->save(App\Users\Role::find(1));
     }
 }

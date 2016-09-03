@@ -15,6 +15,11 @@
                value="{{$setting->label or old('label')}}">
     </div>
     <div class="form-group">
+        <label for="body">Placeholder</label>
+        <input class="form-control" id="placeholder" name="placeholder" type="text" required="required"
+               value="{{$setting->placeholder or old('placeholder')}}">
+    </div>
+    <div class="form-group">
         <label for="body">Type</label>
         <select class="form-control" id="type" name="type" required="required"
                value="{{$setting->type or old('type')}}">
@@ -32,7 +37,7 @@
 
     <br>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-{{TMP_COLOR}}">Submit</button>
     </div>
 </form>
 

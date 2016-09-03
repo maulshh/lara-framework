@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Menu;
+use App\Users\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,7 @@ class MenuController extends Controller {
      */
     public function __construct() {
         $this->middleware('auth');
-        $this->authorize('access-menu');
+        $this->middleware('can:access-menu');
     }
 
     /**
@@ -54,7 +55,9 @@ class MenuController extends Controller {
             'name'          => 'required|max:40',
             'type'          => 'required|in:default,separator,parent',
         ]);
-        Menu::create($request->all());
+        $menu = Menu::create($request->all());
+
+        $this->attachRole($request, $menu);
 
         return redirect('/menu');
     }
@@ -86,6 +89,8 @@ class MenuController extends Controller {
         ]);
         $menu->update($request->all());
 
+        $this->attachRole($request, $menu);
+
         return redirect('/menu');
     }
 
@@ -99,5 +104,11 @@ class MenuController extends Controller {
         $menu->delete();
 
         return redirect('/menu');
+    }
+
+    private function attachRole($request, Menu $menu) {
+        $to_attach = $request->only(Role::getNames());
+        $menu->roles()->detach();
+        $menu->roles()->attach(array_values($to_attach));
     }
 }

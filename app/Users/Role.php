@@ -6,7 +6,7 @@ use App\Menu;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model {
-    
+
     protected $fillable = ['label', 'name'];
 
     public function permissions() {
@@ -23,5 +23,15 @@ class Role extends Model {
 
     public function users() {
         return $this->belongsToMany(User::class);
+    }
+
+    public static function getNames() {
+        $roles = Role::select('name')->get()->toArray();
+        $r = [];
+        foreach ($roles as $role) {
+            $r += $role;
+        }
+
+        return $r;
     }
 }

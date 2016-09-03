@@ -16,19 +16,23 @@ class UserTableSeeder extends Seeder {
         $maul->biodata()->save(factory(\App\Users\Biodata::class)->make());
         $maul->alamats()->save(factory(\App\Users\Alamat::class)->make());
         $maul->roles()->save(App\Users\Role::first());
+        $maul->roles()->save(App\Users\Role::find(2));
+        $maul->roles()->save(App\Users\Role::find(3));
 
+
+
+        $kris = factory(\App\Users\User::class)->create(
+            ['username' => 'kris', 'email' => 'kris@gmail.com', 'password' => bcrypt('password')]
+        );
+        $kris->biodata()->save(factory(\App\Users\Biodata::class)->make());
+        $kris->alamats()->save(factory(\App\Users\Alamat::class)->make());
+        $kris->roles()->save(App\Users\Role::find(2));
+        $kris->roles()->save(App\Users\Role::find(3));
+        
         factory(\App\Users\User::class, 5)->create()->each(function ($u) {
             $u->biodata()->save(factory(\App\Users\Biodata::class)->make());
             $u->alamats()->save(factory(\App\Users\Alamat::class)->make());
-            $u->roles()->save(App\Users\Role::find(2));
-//            $c = $u->catering()->save(factory(App\Catering::class)->make());
-//            for ($i = 0; $i < 10; $i++)
-//                $c->makanans()->save(factory(App\Makanan::class)->make());
-        });
-
-        factory(\App\Users\User::class, 5)->create()->each(function ($u) {
-            $u->biodata()->save(factory(\App\Users\Biodata::class)->make());
-            $u->alamats()->save(factory(\App\Users\Alamat::class)->make());
+            $u->roles()->save(App\Users\Role::find(3));
         });
     }
 }

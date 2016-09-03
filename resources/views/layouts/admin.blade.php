@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-<?php $body_class = "sidebar-mini sidebar-collapse skin-blue" ?>
+<?php $body_class = "sidebar-mini sidebar-collapse skin-".TMP_SKIN ?>
 
 @section('main')
 

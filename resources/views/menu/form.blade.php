@@ -1,3 +1,5 @@
+<?php $roles = App\Users\Role::all(); ?>
+
 <form id="{{$form_id or "form-menu"}}" method="POST" action="{{url(isset($form_action) ? $form_action : 'menu')}}">
 
     {{csrf_field()}}
@@ -50,9 +52,19 @@
                value="{{$menu->position or old('position')}}">
     </div>
 
+    <h3>Accessability</h3>
+    @foreach($roles as $role)
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="{{$role->name}}" id="{{$role->name}}" value="{{$role->id}}"
+            @if($menu->roles->find($role->id) != null) checked="checked" @endif> {{$role->label}}
+        </label>
+    </div>
+    @endforeach
+
     <br>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit Menu</button>
+        <button type="submit" class="btn btn-{{TMP_COLOR}}">Submit Menu</button>
     </div>
 </form>
 

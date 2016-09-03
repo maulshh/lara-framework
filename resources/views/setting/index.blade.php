@@ -10,7 +10,7 @@ $page = 'setting';
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <div class="box box-solid box-primary">
+                <div class="box box-solid box-{{TMP_COLOR}}">
                     <div class="box-header">
                         <div class="box-tools">
                             <a href="{{url('setting/create')}}" class="btn btn-sm btn-default btn-box-tool"><i

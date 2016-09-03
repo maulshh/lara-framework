@@ -6,19 +6,29 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('home', function(){
+Route::get('home', function () {
     return view('home');
 })->middleware('auth');
 
-Route::get('hero/{a?}/{b?}/{c?}', function(){
+Route::get('hero/{a?}/{b?}/{c?}', function () {
     return view('hero');
 })->middleware('auth')->name('hero');
 
-Route::post('permission/{permission}/{role}', 'PermissionController@attachRole');
-Route::delete('permission/{permission}/{role}', 'PermissionController@detachRole');
+Route::group(['prefix' => 'permission', 'as' => 'permission.'], function () {
+    Route::post('{permission}/{role}', 'PermissionController@attachRole')
+        ->name('attach');
+    Route::delete('{permission}/{role}', 'PermissionController@detachRole')
+        ->name('detach');
+});
 
-Route::get('setting/update/{module}', 'SettingController@editValue');
-Route::patch('setting/value', 'SettingController@updateValue');
+Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
+    Route::get('modules', 'SettingController@modules')
+        ->name('list_module');
+    Route::get('update/{module}', 'SettingController@editValue')
+        ->name('edit_value');
+    Route::patch('value', 'SettingController@updateValue')
+        ->name('update_value');
+});
 
 Route::resource('setting', 'SettingController', ['except' => ['show']]);
 Route::resource('admin', 'AdminController');

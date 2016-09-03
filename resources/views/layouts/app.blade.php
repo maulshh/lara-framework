@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')}}">
         {{-- Theme style --}}
         <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
-        <link rel="stylesheet" href="{{asset('dist/css/skins/skin-blue.min.css')}}">
+        <link rel="stylesheet" href="{{asset('dist/css/skins/skin-'.TMP_SKIN.'.min.css')}}">
         @show
 
     {{-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --}}
@@ -27,26 +27,6 @@
         <script src="{{asset('https://oss.maxcdn.com/respond/1.4.2/respond.min.js')}}"></script>
         <![endif]-->
 </head>
-{{--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
---}}
 <body class="hold-transition {{$body_class or ''}}">
 <div class="wrapper">
 

@@ -10,7 +10,7 @@ $page = 'permission';
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <div class="box box-solid box-primary">
+                <div class="box box-solid box-{{TMP_COLOR}}">
                     <div class="box-header">
                         <h3 class="box-title">Create Form</h3>
                     </div>

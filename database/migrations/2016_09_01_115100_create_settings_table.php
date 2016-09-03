@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
             $table->string('module', 20);
             $table->string('name', 40);
             $table->string('label', 40);
+            $table->string('placeholder');
             $table->integer('number')->nullable();
             $table->date('date')->nullable();
             $table->string('string')->nullable();

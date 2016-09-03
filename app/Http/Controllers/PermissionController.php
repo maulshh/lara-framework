@@ -12,7 +12,7 @@ class PermissionController extends Controller {
 
     public function __construct() {
         $this->middleware('auth');
-        $this->authorize('access-permission');
+        $this->middleware('can:access-permission');
     }
 
     /**

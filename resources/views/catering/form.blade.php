@@ -29,7 +29,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-{{TMP_COLOR}}" type="submit">Submit</button>
                             </div>
                         </form>
 

@@ -47,26 +47,6 @@ $factory->define(App\Users\Biodata::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Catering::class, function (Faker\Generator $faker) {
-    return [
-        'nama' => $faker->words(2, true),
-        'provinsi' => $faker->citySuffix,
-        'kota' => $faker->city,
-        'kecamatan' => $faker->streetName,
-        'alamat' => $faker->address,
-        'avatar_toko' => '',
-        'bio_toko' => $faker->paragraph
-    ];
-});
-$factory->define(App\Makanan::class, function (Faker\Generator $faker) {
-    return [
-        'nama' => $faker->words(2, true),
-        'deskripsi' => $faker->paragraph,
-        'pict' => '',
-        'harga' => $faker->numberBetween(10000, 100000)
-    ];
-});
-
 $factory->define(App\Menu::class, function(){
     return [];
 });

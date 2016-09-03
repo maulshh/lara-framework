@@ -16,7 +16,7 @@ class SettingController extends Controller {
      */
     public function __construct() {
         $this->middleware('auth');
-        $this->authorize('access-setting');
+        $this->middleware('can:access-setting', ['except' => ['updateValue', 'editValue']]);
     }
 
     /**
@@ -103,14 +103,30 @@ class SettingController extends Controller {
     }
 
     public function editValue($module) {
+        if ($module == 'global'){
+            $this->authorize('update-setting-global');
+        }
+        else{
+            $this->authorize('access-setting');
+        }
         $settings = Setting::where('module', $module)->get();
 
-        return view('setting.edit-value', compact('settings'));
+        return view('setting.edit-value', compact('settings', 'all_setting'));
+    }
+
+    public function modules() {
+        $modules = Setting::select('module')->distinct()->get();
+        return view('setting.list_module', compact('modules'));
     }
 
     public function updateValue(Request $request) {
+        if ($request->get('module') == 'global')
+            $this->authorize('update-setting-global');
+        else
+            $this->authorize('access-setting');
 //        $settings = [];
-        $all = array_diff_key($request->all(), ['_token' => '', '_method' => '']);
+
+        $all = array_diff_key($request->all(), ['_token' => '', 'module' => '', '_method' => '']);
         foreach ($all as $id => $value) {
             $setting = Setting::find($id);
             $this->validate($request, [
