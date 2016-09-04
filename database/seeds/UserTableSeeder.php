@@ -15,9 +15,9 @@ class UserTableSeeder extends Seeder {
         );
         $maul->biodata()->save(factory(\App\Users\Biodata::class)->make());
         $maul->alamats()->save(factory(\App\Users\Alamat::class)->make());
-        $maul->roles()->save(App\Users\Role::first());
-        $maul->roles()->save(App\Users\Role::find(2));
-        $maul->roles()->save(App\Users\Role::find(3));
+        $maul->roles()->attach(1);
+        $maul->roles()->attach(2);
+        $maul->roles()->attach(3);
 
 
 
@@ -26,13 +26,13 @@ class UserTableSeeder extends Seeder {
         );
         $kris->biodata()->save(factory(\App\Users\Biodata::class)->make());
         $kris->alamats()->save(factory(\App\Users\Alamat::class)->make());
-        $kris->roles()->save(App\Users\Role::find(2));
-        $kris->roles()->save(App\Users\Role::find(3));
+        $kris->roles()->attach(2);
+        $kris->roles()->attach(3);
         
         factory(\App\Users\User::class, 5)->create()->each(function ($u) {
             $u->biodata()->save(factory(\App\Users\Biodata::class)->make());
             $u->alamats()->save(factory(\App\Users\Alamat::class)->make());
-            $u->roles()->save(App\Users\Role::find(3));
+            $u->roles()->attach(3);
         });
     }
 }

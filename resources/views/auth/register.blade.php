@@ -1,8 +1,8 @@
 @extends('layouts.login')
 
-@section('page-title')
-    Register
-@endsection
+<?php
+$page_title = "Register Account";
+?>
 
 @section('content')
 <div class="container">

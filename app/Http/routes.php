@@ -30,6 +30,9 @@ Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
         ->name('update_value');
 });
 
+Route::get('profile/{username?}', 'UserController@profile')
+    ->name('user.profile');
+
 Route::resource('setting', 'SettingController', ['except' => ['show']]);
 Route::resource('admin', 'AdminController');
 Route::resource('user', 'UserController');

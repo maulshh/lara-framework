@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
 use App\Users\User;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller {
 
@@ -16,7 +16,7 @@ class UserController extends Controller {
      */
     public function __construct() {
         $this->middleware('auth');
-        $this->middleware('can:manage-user');
+        $this->middleware('can:manage-user', ['except' => ['profile']]);
     }
 
     /**
@@ -88,5 +88,13 @@ class UserController extends Controller {
      */
     public function destroy($id) {
         //
+    }
+
+    public function profile($username = null) {
+        if($username == null)
+            $profile = Auth::user();
+        else
+            $profile = User::where('username', $username)->first();
+        return view('user.profile', compact('profile'));
     }
 }

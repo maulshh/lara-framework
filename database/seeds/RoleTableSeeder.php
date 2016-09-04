@@ -35,12 +35,12 @@ class RoleTableSeeder extends Seeder {
             $permissions[$i] = factory(\App\Users\Permission::class)->create($permissions[$i]);
         }
 
-        $permissions[0]->roles()->save(App\Users\Role::find(3));
-        $permissions[1]->roles()->save(App\Users\Role::find(1));
-        $permissions[2]->roles()->save(App\Users\Role::find(1));
-        $permissions[3]->roles()->save(App\Users\Role::find(2));
-        $permissions[4]->roles()->save(App\Users\Role::find(1));
-        $permissions[5]->roles()->save(App\Users\Role::find(1));
-        $permissions[6]->roles()->save(App\Users\Role::find(2));
+        $permissions[0]->roles()->attach(3);
+        $permissions[1]->roles()->attach(1);
+        $permissions[2]->roles()->attach(1);
+        $permissions[3]->roles()->attach(2);
+        $permissions[4]->roles()->attach(1);
+        $permissions[5]->roles()->attach(1);
+        $permissions[6]->roles()->attach(2);
     }
 }

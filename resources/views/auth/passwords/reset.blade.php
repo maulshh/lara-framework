@@ -1,5 +1,9 @@
 @extends('layouts.login')
 
+<?php
+$page_title = "Reset Password";
+?>
+
 @section('content')
 <div class="container">
     <div class="row">

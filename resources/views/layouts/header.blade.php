@@ -46,12 +46,7 @@
                                 <div class="row">
                                     @can('view-dashboard')
                                     <div class="col-xs-4 text-center">
-                                        <a href="/home">Dashboard</a>
-                                    </div>
-                                    @endcan
-                                    @can('view-catering')
-                                    <div class="col-xs-4 text-center">
-                                        <a href="{{url('catering')}}">Catering</a>
+                                        <a href="{{url('home')}}">Dashboard</a>
                                     </div>
                                     @endcan
                                     <div class="col-xs-4 text-center">
@@ -63,10 +58,10 @@
                             {{-- Menu Footer--}}
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{url('profile')}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ url('logout') }}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>

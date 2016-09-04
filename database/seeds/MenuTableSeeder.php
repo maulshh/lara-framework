@@ -83,13 +83,13 @@ class MenuTableSeeder extends Seeder {
             $menus[$i] = factory(\App\Menu::class)->create($menus[$i]);
         }
 
-        $menus[0]->roles()->save(App\Users\Role::find(3));
-        $menus[1]->roles()->save(App\Users\Role::find(3));
-        $menus[2]->roles()->save(App\Users\Role::find(3));
-        $menus[3]->roles()->save(App\Users\Role::find(2));
-        $menus[4]->roles()->save(App\Users\Role::find(2));
-        $menus[5]->roles()->save(App\Users\Role::find(2));
-        $menus[6]->roles()->save(App\Users\Role::find(1));
-        $menus[7]->roles()->save(App\Users\Role::find(1));
+        $menus[0]->roles()->attach(3);
+        $menus[1]->roles()->attach(3);
+        $menus[2]->roles()->attach(3);
+        $menus[3]->roles()->attach(2);
+        $menus[4]->roles()->attach(2);
+        $menus[5]->roles()->attach(2);
+        $menus[6]->roles()->attach(1);
+        $menus[7]->roles()->attach(1);
     }
 }

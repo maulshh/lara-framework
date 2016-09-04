@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
 use App\Menu;
 use App\Users\Role;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class MenuController extends Controller {
 
@@ -106,9 +105,16 @@ class MenuController extends Controller {
         return redirect('/menu');
     }
 
+    /**
+     * @param $request
+     * @param Menu $menu
+     */
     private function attachRole($request, Menu $menu) {
         $to_attach = $request->only(Role::getNames());
         $menu->roles()->detach();
-        $menu->roles()->attach(array_values($to_attach));
+        foreach ($to_attach as $key => $value)
+            if ($value != null)
+                $menu->roles()->attach($value);
+
     }
 }

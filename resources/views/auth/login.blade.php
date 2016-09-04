@@ -1,8 +1,8 @@
 @extends('layouts.login')
 
-@section('page-title')
-    Login
-@endsection
+<?php
+$page_title = "Login";
+?>
 
 @section('content')
 <div class="container">

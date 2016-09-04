@@ -2,7 +2,6 @@
 
 <?php
 $user = Auth::user();
-$page = 'welcome';
 ?>
 
 @section('content')
