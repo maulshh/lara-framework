@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "typings install",
     "typings": "typings",
-	"prod": "gulp --production",
+    "prod": "gulp --production",
     "dev": "gulp watch"
   },
   "license": "MAUL",
@@ -29,9 +29,10 @@
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
-    "typings":"^1.0.4",
-	"gulp": "^3.9.1",
+    "typings": "^1.0.4",
+    "gulp": "^3.9.1",
     "laravel-elixir": "^5.0.0",
+    "elixir-typescript": "^2.0.0",
     "bootstrap-sass": "^3.3.0"
   },
   "private": true

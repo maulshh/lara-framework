@@ -27,7 +27,7 @@ elixir(function (mix) {
     mix.copy('resources/assets/typescript/styles', 'public/app/styles');
     mix.copy('resources/assets/typescript/views', 'public/app/views');
 
-    mix.typescript('app.js', 'public/app', '/typescript/**/*.ts', {
+    mix.typescript('app.js', 'public/app', 'resources/assets/typescript/**/*.ts', {
         "target": "ES6",
         "module": "system",
         "moduleResolution": "node",

@@ -50,7 +50,7 @@ $page = 'permission';
                                                 @if($r = $permission->roles->where('id', $role->id)->first())
                                                     @if($editable)
                                                         <?php $pivot = $r->pivot ?>
-                                                        <form action="{{url('permission/'.$pivot->permission_id.'/'.$pivot->role_id)}}"
+                                                        <form action="{{url('permission/'.$pivot->permission_id.'/role/'.$pivot->role_id)}}"
                                                               method="POST">
                                                             {{csrf_field()}}
                                                             {{method_field('DELETE')}}
@@ -64,7 +64,7 @@ $page = 'permission';
                                                     @endif
                                                 @else
                                                     @if($editable)
-                                                        <form action="{{url('permission/'.$permission->id.'/'.$role->id)}}"
+                                                        <form action="{{url('permission/'.$permission->id.'/role/'.$role->id)}}"
                                                               method="POST">
                                                             {{csrf_field()}}
                                                             <a href="#" onclick="this.parentNode.submit()"

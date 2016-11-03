@@ -15,9 +15,9 @@ Route::get('hero/{a?}/{b?}/{c?}', function () {
 })->middleware('auth')->name('hero');
 
 Route::group(['prefix' => 'permission', 'as' => 'permission.'], function () {
-    Route::post('{permission}/{role}', 'PermissionController@attachRole')
+    Route::post('{permission}/role/{role}', 'PermissionController@attachRole')
         ->name('attach');
-    Route::delete('{permission}/{role}', 'PermissionController@detachRole')
+    Route::delete('{permission}/role/{role}', 'PermissionController@detachRole')
         ->name('detach');
 });
 
@@ -39,3 +39,12 @@ Route::resource('user', 'UserController');
 Route::resource('role', 'RoleController', ['except' => ['show']]);
 Route::resource('permission', 'PermissionController', ['except' => ['show']]);
 Route::resource('menu', 'MenuController', ['except' => ['show']]);
+
+/**
+ * stereotype for routes:
+ * {controller_name; unique_feature;}/{variable: id; username; etc;}/{action; component;}
+ * 
+ * e.g.:
+ * -> user/1/edit (action)
+ * -> permission/1/role/1 (component)
+ **/

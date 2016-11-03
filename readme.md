@@ -11,42 +11,62 @@ Using laravel and an admin template (for now its admin LTE), we create a base fo
 + Service provider for permission and setting for an ease of accessing variables
 
 ### Prerequisite:
-+ Environment for laravel (PHP 5.5, composer ..)
-+ npm, gulp cli
++ Environment for laravel (PHP >= 5.6, ..)
++ Composer installed
++ Also npm latest version (npm v3.8.x and node 6.x.x)
++ gulp cli
 
 ### Installation:
 
-<pre>composer install</pre>
-<pre>npm install</pre>
+1. do composer install
+    ```
+    composer install
+    ```
 
-Prepare a database, can be mysql, sqlite, etc.
+2. load the javascript node libraries using npm install
+    ```
+    npm install
+    ```
 
-Edit the ``.env` file and also `config/database.php`
+3. Prepare a database, can be mysql, sqlite, etc.
 
-comment on these two code, inside the boot method:
+4. Edit the `.env` file and also `config/database.php`
 
-`app\Providers\AppServiceProvider.php`
-```php
+5. Comment on these two code, inside the boot method:
+   `app\Providers\AppServiceProvider.php`
+   ```php
         $settings = Setting::all();
         foreach($settings as $setting){
             define(strtoupper($setting->name), $setting->getValue());
         }
-```
+   ```
 
-`app\Providers\AuthServiceProvider.php`
-```php
+   `app\Providers\AuthServiceProvider.php`
+   ```php
         foreach ($this->getPermissions() as $permission) {
             $gate->define($permission->name, function($user) use ($permission){
                 return $user->hasRole($permission->roles);
             });
         }
-```
-these codes are booted in php artisan and causes error before the database tables are created.
+   ```
+   These codes are booted in php artisan and causes error before the database tables are created.
 
-<pre>php artisan migrate --seed</pre>
+6. use php artisan migrate to create database tables and also `--seed` for the dummy data.
+   ```
+   php artisan optimize
+   ```
+   ```
+   php artisan migrate --seed
+   ```
 
-<pre>gulp</pre>
+7. gulp dependencies
+   ```
+   gulp
+   ```
 
-uncomment the two codes on `app\Providers\AuthServiceProvider.php` and `app\Providers\AppServiceProvider.php`.
+8. Uncomment the two codes on `app\Providers\AuthServiceProvider.php` and `app\Providers\AppServiceProvider.php`.
 
-<pre>php artisan serve</pre>
+9. Serve your quickstart
+   ```
+   php artisan serve
+   ```
