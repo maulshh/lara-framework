@@ -49,6 +49,7 @@ class SettingTableSeeder extends Seeder {
                 'placeholder' => '[]',
                 'label'       => 'Banners JSON',
                 'type'        => 'text',
+                'boot'        => false,
                 'text'      => "[
                     {
                         label: 'Carousel Home',
@@ -65,6 +66,14 @@ class SettingTableSeeder extends Seeder {
                         height: 250,
                         variants: [1, 2, 3],
                         location: 'images/banner/'
+                    },
+                    {
+                        label: 'Logo APP',
+                        name: 'logo',
+                        width: null,
+                        height: null,
+                        variants: null,
+                        location: 'images/'
                     }
                 ]"
             ]

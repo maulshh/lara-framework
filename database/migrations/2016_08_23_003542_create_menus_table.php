@@ -17,7 +17,6 @@ class CreateMenusTable extends Migration
             $table->string('module_target', 40);
             $table->string('position', 8);
             $table->string('icon', 25);
-            $table->string('menu', 40);
             $table->string('uri');
             $table->string('title', 50);
             $table->string('name', 40);

@@ -24,7 +24,7 @@ class CreateSettingsTable extends Migration
             $table->string('string')->nullable();
             $table->text('text')->nullable();
             $table->string('type', 40)->default('text');
-            $table->unique(['name', 'module', 'boot']);
+            $table->unique(['name', 'boot']);
             $table->timestamps();
         });
     }

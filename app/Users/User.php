@@ -16,8 +16,8 @@ class User extends Authenticatable
     use HasRoles;
 
     protected static $rules = [
-        'username' => 'required|unique:users,username', 
-        'email' => 'required|unique:users,email',
+        'username' => 'required|unique:users,username',
+        'email'    => 'required|unique:users,email',
     ];
 
     protected static $status_list = [
@@ -48,7 +48,7 @@ class User extends Authenticatable
 //Appends
     public function getTanggalLahirAttribute($format = null)
     {
-        return $this->biodata->bday_dd. '-' .$this->biodata->bday_mm. '-' .$this->biodata->bday_yy;
+        return $this->biodata->bday_dd . '-' . $this->biodata->bday_mm . '-' . $this->biodata->bday_yy;
     }
 
 //Relations
@@ -80,11 +80,9 @@ class User extends Authenticatable
 
     public function setDefaultAlamat($id)
     {
-        if ($alamat = $this->alamats()->find($id)) {
-            if($this->alamat) {
-                $this->alamat->dissociate();
-                $this->alamat->save();
-            }
+        if ($this->alamat && $id != $this->alamat->id && $alamat = $this->alamats()->find($id)) {
+            $this->alamat()->dissociate();
+            $this->alamat->save();
 
             return $this->alamat()->save($alamat);
         }

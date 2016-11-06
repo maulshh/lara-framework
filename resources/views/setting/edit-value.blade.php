@@ -48,7 +48,6 @@ $page = 'setting';
                                             </div>
                                         </div>
                                     @endif
-
                                 @endforeach
                             </div>
                             <div class="row">

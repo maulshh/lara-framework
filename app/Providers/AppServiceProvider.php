@@ -6,18 +6,20 @@ use App\Setting;
 use Illuminate\Support\ServiceProvider;
 use Schema;
 
-class AppServiceProvider extends ServiceProvider {
+class AppServiceProvider extends ServiceProvider
+{
 
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
         if (Schema::hasTable('settings')) {
-            $settings = Setting::all();
+            $settings = Setting::where('boot', true)->get();
             foreach ($settings as $setting) {
-                define(strtoupper($setting->name), $setting->getValue());
+                define(strtoupper($setting->name), $setting->value);
             }
         }
     }
@@ -27,7 +29,8 @@ class AppServiceProvider extends ServiceProvider {
      *
      * @return void
      */
-    public function register() {
+    public function register()
+    {
         //
     }
 }

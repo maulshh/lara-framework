@@ -1,10 +1,4 @@
-@extends('layouts.admin')
-
-<?php
-$user = Auth::user();
-$page_title = "Permissions";
-$page = 'permission';
-?>
+@extends('layouts.admin', ['page_title' => "Permissions", 'page' => 'permission'])
 
 @section('content')
     <div class="container">
@@ -14,10 +8,10 @@ $page = 'permission';
                     <div class="box-header">
                         <div class="box-tools">
                             @if($editable)
-                                <a href="{{url('permission')}}" class="btn btn-sm btn-box-tool btn-{{TMP_COLOR}}"><i
+                                <a href="{{url('admin/permission')}}" class="btn btn-sm btn-box-tool btn-{{TMP_COLOR}}"><i
                                             class="fa fa-check"></i> &nbsp; Selesai</a>
                             @else
-                                <a href="{{url('permission/all/edit')}}"
+                                <a href="{{url('admin/permission/all/edit')}}"
                                    class="btn btn-sm btn-box-tool btn-{{TMP_COLOR}}"><i
                                             class="fa fa-edit"></i> &nbsp; Edit Permission</a>
                             @endif
@@ -35,7 +29,7 @@ $page = 'permission';
                                     @endforeach
                                     @if($editable)
                                         <th class="col-sm-2">
-                                            <a href="{{url('role/create')}}" class="btn btn-sm btn-default"><i
+                                            <a href="{{url('admin/role/create')}}" class="btn btn-sm btn-default"><i
                                                         class="fa fa-plus"></i> Add New Role
                                             </a>
                                         </th>
@@ -50,7 +44,7 @@ $page = 'permission';
                                                 @if($r = $permission->roles->where('id', $role->id)->first())
                                                     @if($editable)
                                                         <?php $pivot = $r->pivot ?>
-                                                        <form action="{{url('permission/'.$pivot->permission_id.'/role/'.$pivot->role_id)}}"
+                                                        <form action="{{url('admin/permission/'.$pivot->permission_id.'/role/'.$pivot->role_id)}}"
                                                               method="POST">
                                                             {{csrf_field()}}
                                                             {{method_field('DELETE')}}
@@ -64,7 +58,7 @@ $page = 'permission';
                                                     @endif
                                                 @else
                                                     @if($editable)
-                                                        <form action="{{url('permission/'.$permission->id.'/role/'.$role->id)}}"
+                                                        <form action="{{url('admin/permission/'.$permission->id.'/role/'.$role->id)}}"
                                                               method="POST">
                                                             {{csrf_field()}}
                                                             <a href="#" onclick="this.parentNode.submit()"
@@ -80,7 +74,7 @@ $page = 'permission';
                                         @endforeach
                                         @if($editable)
                                             <td>
-                                                <form action="{{url('permission/'.$permission->id)}}" method="POST">
+                                                <form action="{{url('admin/permission/'.$permission->id)}}" method="POST">
                                                     {{csrf_field()}}
                                                     {{method_field('DELETE')}}
                                                     <a href="#" onclick="this.parentNode.submit()" class="text-red">
@@ -94,7 +88,7 @@ $page = 'permission';
                                 @if($editable)
                                     <tr>
                                         <th colspan="2">
-                                            <a href="{{url('permission/create')}}" class="btn btn-sm btn-default"><i
+                                            <a href="{{url('admin/permission/create')}}" class="btn btn-sm btn-default"><i
                                                         class="fa fa-plus"></i> Add New
                                                 Permission
                                             </a>
@@ -102,7 +96,7 @@ $page = 'permission';
                                         @foreach($roles as $role)
                                             @if($editable)
                                                 <td>
-                                                    <form action="{{url('role/'.$role->id)}}" method="POST">
+                                                    <form action="{{url('admin/role/'.$role->id)}}" method="POST">
                                                         {{csrf_field()}}
                                                         {{method_field('DELETE')}}
                                                         <a href="#" onclick="this.parentNode.submit()" class="text-red">
@@ -131,4 +125,15 @@ $page = 'permission';
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @parent
+
+    <script>
+        const vue = new Vue({
+            el: 'body',
+            mixins: [store]
+        });
+    </script>
 @endsection
