@@ -16,10 +16,21 @@ $page = 'role';
                     </div>
 
                     <div class="box-body">
-                        @include('role.form', ['form_action' => 'role/'.$role->id, 'form_method' => 'PATCH'])
+                        @include('role.form', ['form_action' => 'admin/role/'.$role->id, 'form_method' => 'PATCH'])
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @parent
+
+    <script>
+        const vue = new Vue({
+            el: 'body',
+            mixins: [store]
+        });
+    </script>
 @endsection

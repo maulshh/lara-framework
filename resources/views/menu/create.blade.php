@@ -1,10 +1,4 @@
-@extends('layouts.admin')
-
-<?php
-$user = Auth::user();
-$page_title = "Buat Menu Baru";
-$page = 'menu';
-?>
+@extends('layouts.admin',['page_title' => "Buat Menu Baru", 'page' => 'menu'])
 
 @section('content')
     <div class="container">

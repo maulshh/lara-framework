@@ -5,6 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,10 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
+
+            //login
+            $table->string('username')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('default_alamat')->unsigned()->nullable();
+            $table->string('facebook_id')->unique()->nullable();
+            $table->tinyInteger('status');
+
             $table->rememberToken();
             $table->timestamps();
         });

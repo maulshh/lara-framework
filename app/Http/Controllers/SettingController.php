@@ -6,15 +6,18 @@ use App\Setting;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
-class SettingController extends Controller {
+class SettingController extends Controller
+{
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
         $this->middleware('can:access-setting', ['except' => ['updateValue', 'editValue']]);
     }
@@ -24,10 +27,12 @@ class SettingController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
+        $user = Auth::user();
         $settings = Setting::all();
 
-        return view('setting.index', compact('settings'));
+        return view('setting.index', compact('settings', 'user'));
     }
 
     /**
@@ -35,8 +40,11 @@ class SettingController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view('setting.create');
+    public function create()
+    {
+        $user = Auth::user();
+
+        return view('setting.create', compact('user'));
     }
 
     /**
@@ -45,16 +53,12 @@ class SettingController extends Controller {
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->validate($request, [
-            'name'   => 'required|max:40',
-            'label'  => 'required|max:40',
-            'type'   => 'required|max:40',
-            'module' => 'required|max:20',
-        ]);
+    public function store(Request $request)
+    {
+        $this->validate($request, Setting::getRules());
         Setting::create($request->all());
 
-        return redirect('/setting');
+        return redirect('admin/setting');
     }
 
     /**
@@ -64,8 +68,11 @@ class SettingController extends Controller {
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function edit(Setting $setting) {
-        return view('setting.edit', compact('setting'));
+    public function edit(Setting $setting)
+    {
+        $user = Auth::user();
+
+        return view('setting.edit', compact('setting', 'user'));
     }
 
     /**
@@ -76,16 +83,12 @@ class SettingController extends Controller {
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function update(Request $request, Setting $setting) {
-        $this->validate($request, [
-            'name'   => 'required|max:40',
-            'label'  => 'required|max:40',
-            'module' => 'required|max:40',
-            'type'   => 'required|max:20',
-        ]);
+    public function update(Request $request, Setting $setting)
+    {
+        $this->validate($request, Setting::getRules());
         $setting->update($request->all());
 
-        return redirect('/setting');
+        return redirect('admin/setting');
     }
 
     /**
@@ -96,51 +99,53 @@ class SettingController extends Controller {
      * @throws \Exception
      * @internal param int $id
      */
-    public function destroy(Setting $setting) {
+    public function destroy(Setting $setting)
+    {
         $setting->delete();
 
-        return redirect('/setting');
+        return redirect('admin/setting');
     }
 
-    public function editValue($module) {
-        if ($module == 'global'){
-            $this->authorize('update-setting-global');
-        }
-        else{
-            $this->authorize('access-setting');
-        }
+    public function editValue($module)
+    {
+        $user = Auth::user();
+
+        if (!$user->can('access-setting'))
+            $this->authorize('update-setting-' . $module);
+
         $settings = Setting::where('module', $module)->get();
 
-        return view('setting.edit-value', compact('settings', 'all_setting'));
+        return view('setting.edit-value', compact('settings', 'all_setting', 'user'));
     }
 
-    public function modules() {
+    public function modules()
+    {
+        $user = Auth::user();
+
         $modules = Setting::select('module')->distinct()->get();
-        return view('setting.list_module', compact('modules'));
+
+        return view('setting.list_module', compact('modules', 'user'));
     }
 
-    public function updateValue(Request $request) {
-        if ($request->get('module') == 'global')
-            $this->authorize('update-setting-global');
-        else
-            $this->authorize('access-setting');
-//        $settings = [];
+    public function updateValue(Request $request, $module)
+    {
+        $user = Auth::user();
 
-        $all = array_diff_key($request->all(), ['_token' => '', 'module' => '', '_method' => '']);
+        if (!$user->can('access-setting'))
+            $this->authorize('update-setting-' . $module);
+
+        $all = array_diff_key($request->all(), ['_token' => '', '_method' => '']);
         foreach ($all as $id => $value) {
             $setting = Setting::find($id);
             $this->validate($request, [
-                $id => $setting->validation_type()
+                $id => $setting->validationType()
             ]);
-            $setting->setValue($value);
-//            $settings[] = $setting;
+            if($setting->setValue($value)) {
+                flash("Setting $setting->label tidak memiliki tipe yang benar!!");
+                return back();
+            }
         }
-//        foreach ($settings as $setting) {
-//            $setting->save();
-//        }
-//        commented, jika semua harus valid dulu baru melaukan save()
-//        method setValue() harus diubah dahulu
 
-        return redirect('/setting/update/global');
+        return redirect('admin/setting/' . $request->segment(3) . '/update');
     }
 }

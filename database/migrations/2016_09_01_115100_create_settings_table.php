@@ -17,13 +17,14 @@ class CreateSettingsTable extends Migration
             $table->string('module', 20);
             $table->string('name', 40);
             $table->string('label', 40);
+            $table->boolean('boot')->default(true);
             $table->string('placeholder');
             $table->integer('number')->nullable();
             $table->date('date')->nullable();
             $table->string('string')->nullable();
             $table->text('text')->nullable();
             $table->string('type', 40)->default('text');
-            $table->unique(['name', 'module']);
+            $table->unique(['name', 'module', 'boot']);
             $table->timestamps();
         });
     }

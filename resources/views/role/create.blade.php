@@ -23,3 +23,14 @@ $page = 'role';
         </div>
     </div>
 @endsection
+
+@section('script')
+    @parent
+
+    <script>
+        const vue = new Vue({
+            el: 'body',
+            mixins: [store]
+        });
+    </script>
+@endsection

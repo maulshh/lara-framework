@@ -13,7 +13,6 @@ class RoleTableSeeder extends Seeder {
         $roles = [
             ['name' => 'webmaster', 'label' => 'Webmaster'],
             ['name' => 'admin', 'label' => 'Administrator'],
-//            ['name' => 'mitra', 'label' => 'Mitra'],
             ['name' => 'user', 'label' => 'User']
         ];
 
@@ -29,6 +28,7 @@ class RoleTableSeeder extends Seeder {
             ['name' => 'access-permission', 'label' => 'Access All Permissions'],
             ['name' => 'access-role', 'label' => 'Access All Roles'],
             ['name' => 'manage-user', 'label' => 'Manage Users'],
+            ['name' => 'change-banner', 'label' => 'Change Banner'],
         ];
 
         for ($i = 0; $i < count($permissions); $i++) {
@@ -42,5 +42,6 @@ class RoleTableSeeder extends Seeder {
         $permissions[4]->roles()->attach(1);
         $permissions[5]->roles()->attach(1);
         $permissions[6]->roles()->attach(2);
+        $permissions[7]->roles()->attach(2);
     }
 }

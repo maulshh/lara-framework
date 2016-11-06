@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 <?php
-$user = Auth::user();
 $page_title = "Edit setting " . $setting->label;
 $page = 'setting';
 ?>
@@ -16,10 +15,21 @@ $page = 'setting';
                     </div>
 
                     <div class="box-body">
-                        @include('setting.form', ['form_action' => 'setting/'.$setting->id, 'form_method' => 'PATCH'])
+                        @include('setting.form', ['form_action' => 'admin/setting/'.$setting->id, 'form_method' => 'PATCH'])
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @parent
+
+    <script>
+        const vue = new Vue({
+            el: 'body',
+            mixins: [store]
+        });
+    </script>
 @endsection

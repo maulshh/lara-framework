@@ -14,18 +14,13 @@
         <link rel="stylesheet"
               href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')}}">
         {{-- Ionicons --}}
-        <link rel="stylesheet" href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')}}">
+        <link rel="stylesheet"
+              href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')}}">
         {{-- Theme style --}}
         <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
         <link rel="stylesheet" href="{{asset('dist/css/skins/skin-'.TMP_SKIN.'.min.css')}}">
-        @show
+    @show
 
-    {{-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --}}
-    {{-- WARNING: Respond.js doesn't work if you view the page via file: --}}
-    <!--[if lt IE 9]>
-        <script src="{{asset('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')}}"></script>
-        <script src="{{asset('https://oss.maxcdn.com/respond/1.4.2/respond.min.js')}}"></script>
-        <![endif]-->
 </head>
 <body class="hold-transition {{$body_class or ''}}">
 <div class="wrapper">
@@ -39,6 +34,7 @@
     @can('view-dashboard')
         @include('layouts.control-sidebar')
     @endcan
+
 </div>
 {{-- ./wrapper --}}
 
@@ -53,10 +49,19 @@
     <script src="{{asset('dist/js/app.min.js')}}"></script>
 
     <script>
-        $(".kembali").click(function(){
+        $(".kembali").click(function () {
             history.go(-1);
         });
     </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.27/vue.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/vue-strap/1.1.23/vue-strap.js"></script>
+
+    @include('script.vue.store')
+    @include('layouts.flash_message')
 @show
 
 </body>

@@ -7,10 +7,13 @@ use App\Users\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
-class PermissionController extends Controller {
+class PermissionController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
         $this->middleware('can:access-permission');
     }
@@ -20,12 +23,14 @@ class PermissionController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $roles = Role::all();
+        $user = Auth::user();
         $permissions = Permission::all();
         $editable = false;
 
-        return view('permission.index', compact('roles', 'permissions', 'editable'));
+        return view('permission.index', compact('roles', 'permissions', 'user', 'editable'));
     }
 
     /**
@@ -33,8 +38,11 @@ class PermissionController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view('permission.create');
+    public function create()
+    {
+        $user = Auth::user();
+
+        return view('permission.create', compact('user'));
     }
 
     /**
@@ -43,14 +51,12 @@ class PermissionController extends Controller {
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->validate($request, [
-            'name'  => 'required|max:40',
-            'label' => 'required|max:40',
-        ]);
+    public function store(Request $request)
+    {
+        $this->validate($request, Permission::getRules());
         Permission::create($request->all());
 
-        return redirect('/permission/all/edit');
+        return redirect('admin/permission/all/edit');
     }
 
     /**
@@ -59,17 +65,20 @@ class PermissionController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {        
+        $user = Auth::user();
+
         if ($id == "all") {
             $roles = Role::all();
             $permissions = Permission::all();
             $editable = true;
 
-            return view('permission.index', compact('roles', 'permissions', 'editable'));
+            return view('permission.index', compact('roles', 'permissions', 'editable', 'user'));
         } else {
             $permission = Permission::find($id);
 
-            return view('permission.edit', compact('permission'));
+            return view('permission.edit', compact('permission', 'user'));
         }
     }
 
@@ -81,14 +90,12 @@ class PermissionController extends Controller {
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function update(Request $request, Permission $permission) {
-        $this->validate($request, [
-            'name'  => 'required|max:40',
-            'label' => 'required|max:40',
-        ]);
+    public function update(Request $request, Permission $permission)
+    {
+        $this->validate($request, Permission::getRules());
         $permission->update($request->all());
 
-        return redirect('/permission/all/edit');
+        return redirect('admin/permission/all/edit');
     }
 
     /**
@@ -99,21 +106,24 @@ class PermissionController extends Controller {
      * @throws \Exception
      * @internal param int $id
      */
-    public function destroy(Permission $permission) {
+    public function destroy(Permission $permission)
+    {
         $permission->delete();
 
-        return redirect('/permission/all/edit');
+        return redirect('admin/permission/all/edit');
     }
 
-    public function detachRole(Permission $permission, Role $role) {
+    public function detachRole(Permission $permission, Role $role)
+    {
         $permission->roles()->detach($role->id);
 
-        return redirect('/permission/all/edit');
-    } 
-    
-    public function attachRole(Permission $permission, Role $role) {
+        return redirect('admin/permission/all/edit');
+    }
+
+    public function attachRole(Permission $permission, Role $role)
+    {
         $permission->roles()->attach($role->id);
 
-        return redirect('/permission/all/edit');
+        return redirect('admin/permission/all/edit');
     }
 }

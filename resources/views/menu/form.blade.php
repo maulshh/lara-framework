@@ -1,14 +1,13 @@
 <?php $roles = App\Users\Role::all(); ?>
 
-<form id="{{$form_id or "form-menu"}}" method="POST" action="{{url(isset($form_action) ? $form_action : 'menu')}}">
+<form id="{{$form_id or "form-menu"}}" method="POST" action="{{url(isset($form_action) ? $form_action : 'admin/menu')}}">
 
     {{csrf_field()}}
     {{method_field(isset($form_method) ? $form_method : 'POST')}}
 
     <div class="form-group">
-        <label for="name">Nama</label>
+        <label for="module_target">Name</label>
         <input class="form-control" id="name" required="required" name="name" type="text"
-               placeholder="Isi nama sesuai naming-convention pada route laravel"
                value="{{$menu->name or old('name')}}">
     </div>
     <div class="form-group">
@@ -57,7 +56,7 @@
     <div class="checkbox">
         <label>
             <input type="checkbox" name="{{$role->name}}" id="{{$role->name}}" value="{{$role->id}}"
-            @if($menu->roles->find($role->id) != null) checked="checked" @endif> {{$role->label}}
+            @if(isset($menu) && $menu->roles->find($role->id) != null) checked="checked" @endif> {{$role->label}}
         </label>
     </div>
     @endforeach

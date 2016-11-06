@@ -27,18 +27,19 @@
                         {{-- Menu Toggle Button --}}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{-- The user image in the navbar--}}
-                            <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+                            <img src="{{ $user->biodata->avatar? asset($user->biodata->avatar) : asset("images/user/default.jpg") }}" class="user-image" alt="User Image">
                             {{-- hidden-xs hides the username on small devices so only the image appears. --}}
                             <span class="hidden-xs">{{ strtoupper(substr($user->username, 0, 1)) . substr($user->username, 1) }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             {{-- The user image in the menu --}}
                             <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="{{ $user->biodata->avatar? asset($user->biodata->avatar) : asset("images/user/default.jpg") }}" class="img-circle" alt="User Image">
 
                                 <p>
                                     {{ $user->biodata->nama }} - {{ $user->roles()->first()->label }}
-                                    <small>Member since Nov. 2012</small>
+                                    <?php $date = date_timestamp_get($user->created_at)?>
+                                    <small>Member since {{ date('M Y', $date) }}</small>
                                 </p>
                             </li>
                             {{-- Menu Body --}}

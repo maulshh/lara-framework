@@ -1,9 +1,9 @@
 <form id="{{$form_id or "form-setting"}}" method="POST"
-      action="{{url(isset($form_action) ? $form_action : 'setting')}}">
-    
+      action="{{url(isset($form_action) ? $form_action : 'admin/setting')}}">
+
     {{csrf_field()}}
     {{method_field(isset($form_method) ? $form_method : 'POST')}}
-    
+
     <div class="form-group">
         <label for="name">Name</label>
         <input class="form-control" id="name" required="required" name="name" type="text"
@@ -22,7 +22,7 @@
     <div class="form-group">
         <label for="body">Type</label>
         <select class="form-control" id="type" name="type" required="required"
-               value="{{$setting->type or old('type')}}">
+                value="{{$setting->type or old('type')}}">
             <option value="string">String</option>
             <option value="number">Integer</option>
             <option value="text">Text</option>
@@ -33,6 +33,12 @@
         <label for="body">Module</label>
         <input class="form-control" id="module" name="module" type="text" required="required"
                value="{{$setting->module or old('module')}}">
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="boot" value="true"
+                    {{ !isset($setting) || $setting->boot ? 'checked="checked"' : '' }}> Boot ?
+        </label>
     </div>
 
     <br>

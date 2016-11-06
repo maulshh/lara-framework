@@ -1,5 +1,5 @@
 <form id="{{$form_id or "form-role"}}" method="POST"
-      action="{{url(isset($form_action) ? $form_action : 'role')}}">
+      action="{{url(isset($form_action) ? $form_action : 'admin/role')}}">
     
     {{csrf_field()}}
     {{method_field(isset($form_method) ? $form_method : 'POST')}}

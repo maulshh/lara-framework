@@ -6,10 +6,13 @@ use App\Users\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
-class RoleController extends Controller {
+class RoleController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
         $this->middleware('can:access-permission');
     }
@@ -19,10 +22,12 @@ class RoleController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $roles = Role::all();
+        $user = Auth::user();
 
-        return view('role.index', compact('roles'));
+        return view('role.index', compact('roles', 'user'));
     }
 
     /**
@@ -30,8 +35,11 @@ class RoleController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view('role.create');
+    public function create()
+    {
+        $user = Auth::user();
+
+        return view('role.create', compact('user'));
     }
 
     /**
@@ -40,14 +48,12 @@ class RoleController extends Controller {
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->validate($request, [
-            'name'  => 'required|max:40',
-            'label' => 'required|max:40',
-        ]);
+    public function store(Request $request)
+    {
+        $this->validate($request, Role::getRules());
         Role::create($request->all());
 
-        return redirect('/permission/all/edit');
+        return redirect('permission/all/edit');
     }
 
     /**
@@ -57,8 +63,11 @@ class RoleController extends Controller {
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function edit(Role $role) {
-        return view('role.edit', compact('role'));
+    public function edit(Role $role)
+    {
+        $user = Auth::user();
+
+        return view('role.edit', compact('role', 'user'));
     }
 
     /**
@@ -69,14 +78,12 @@ class RoleController extends Controller {
      * @return \Illuminate\Http\Response
      * @internal param int $id
      */
-    public function update(Request $request, Role $role) {
-        $this->validate($request, [
-            'name'  => 'required|max:40',
-            'label' => 'required|max:40',
-        ]);
+    public function update(Request $request, Role $role)
+    {
+        $this->validate($request, Role::getRules());
         $role->update($request->all());
 
-        return redirect('/role');
+        return redirect('admin/permission/all/edit');
     }
 
     /**
@@ -87,9 +94,10 @@ class RoleController extends Controller {
      * @throws \Exception
      * @internal param int $id
      */
-    public function destroy(Role $role) {
+    public function destroy(Role $role)
+    {
         $role->delete();
 
-        return redirect('/role');
+        return redirect('admin/permission/all/edit');
     }
 }

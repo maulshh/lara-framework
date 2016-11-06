@@ -1,10 +1,4 @@
-@extends('layouts.admin')
-
-<?php
-$user = Auth::user();
-$page_title = "Pengaturan Menu";
-$page = 'menu';
-?>
+@extends('layouts.admin',['page_title' => "Pengaturan Menu", 'page' => "menu"])
 
 @section('content')
     <div class="container">
@@ -19,14 +13,13 @@ $page = 'menu';
                     </div>
 
                     <div class="box-body">
-                        <a href="{{url('menu/create')}}" class="btn btn-{{TMP_COLOR}}"><i class="fa fa-file"></i> &nbsp; Create New
+                        <a href="{{url('admin/menu/create')}}" class="btn btn-{{TMP_COLOR}}"><i class="fa fa-file"></i> &nbsp; Create New
                             Menu
                         </a>
                         <hr>
                         <div class="form-group">
                             <label>Menu Target</label>
-                            <select class="form-control" id="target_posts" name="target_posts"
-                                    onchange="ganti_target(this.value)">
+                            <select class="form-control" @change="getMenus">
                                 <option>--Pilih Target Halaman--</option>
                                 <?php foreach($targets as $target){ ?>
                                 <option value="<?php echo $target->module_target?>"><?php echo $target->module_target?></option>
@@ -43,4 +36,22 @@ $page = 'menu';
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @parent
+
+    <script>
+        const vue = new Vue({
+            el: 'body',
+            mixins: [store],
+            methods: {
+                getMenus: function (e) {
+                    this.$http.get('/api/menu/menu_list/' + e.target.value).then((response) => {
+                        $("#menus").html(response.body);
+                    })
+                }
+            }
+        });
+    </script>
 @endsection

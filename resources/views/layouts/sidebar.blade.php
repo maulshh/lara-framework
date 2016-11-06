@@ -6,7 +6,7 @@
 
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ $user->avatar? asset($user->avatar) : asset("dist/img/user2-160x160.jpg") }}" class="img-circle"
+                <img src="{{ $user->biodata->avatar? asset($user->biodata->avatar) : asset("images/user/default.jpg") }}" class="img-circle"
                      alt="User Image"/>
             </div>
             <div class="pull-left info">

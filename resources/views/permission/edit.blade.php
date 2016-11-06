@@ -1,10 +1,4 @@
-@extends('layouts.admin')
-
-<?php
-$user = Auth::user();
-$page_title = "Edit Permission " . $permission->label;
-$page = 'permission';
-?>
+@extends('layouts.admin', ['page_title' => "Edit Permission " . $permission->label, 'page' => 'permission'])
 
 @section('content')
     <div class="container">
@@ -16,10 +10,21 @@ $page = 'permission';
                     </div>
 
                     <div class="box-body">
-                        @include('permission.form', ['form_action' => 'permission/'.$permission->id, 'form_method' => 'PATCH'])
+                        @include('permission.form', ['form_action' => 'admin/permission/'.$permission->id, 'form_method' => 'PATCH'])
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @parent
+
+    <script>
+        const vue = new Vue({
+            el: 'body',
+            mixins: [store]
+        });
+    </script>
 @endsection

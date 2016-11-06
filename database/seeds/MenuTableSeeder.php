@@ -22,25 +22,16 @@ class MenuTableSeeder extends Seeder {
                 'position'      => '1',
                 'icon'          => 'home',
                 'name'          => 'dashboard',
-                'uri'           => '/home',
+                'uri'           => 'admin',
                 'title'         => 'Go to Dashboard',
                 'body'          => 'Dashboard'
             ],
             [
                 'module_target' => 'sidebar-admin',
-                'position'      => '2',
-                'icon'          => 'user',
-                'name'          => 'hero',
-                'uri'           => '/hero',
-                'title'         => 'Go to Hero App',
-                'body'          => 'Hero App'
-            ],
-            [
-                'module_target' => 'sidebar-admin',
-                'position'      => '3',
+                'position'      => '5.1',
                 'icon'          => 'group',
                 'name'          => 'user',
-                'uri'           => '/user',
+                'uri'           => 'admin/user',
                 'title'         => 'User Management',
                 'body'          => 'Users'
             ],
@@ -53,18 +44,19 @@ class MenuTableSeeder extends Seeder {
             [
                 'module_target' => 'sidebar-admin',
                 'position'      => '9.1',
-                'icon'          => 'gear',
-                'uri'           => 'setting/update/global',
                 'name'          => 'setting',
+                'icon'          => 'gear',
+                'uri'           => '',
                 'title'         => 'Pengaturan Website',
-                'body'          => 'Settings'
+                'body'          => 'Pengaturan',
+                'type'          => 'parent'
             ],
             [
                 'module_target' => 'sidebar-admin',
                 'position'      => '9.2',
-                'icon'          => 'bars',
-                'uri'           => 'menu',
                 'name'          => 'menu',
+                'icon'          => 'bars',
+                'uri'           => 'admin/menu',
                 'title'         => 'Pengaturan Menu',
                 'body'          => 'Menus'
             ],
@@ -72,10 +64,19 @@ class MenuTableSeeder extends Seeder {
                 'module_target' => 'sidebar-admin',
                 'position'      => '9.3',
                 'icon'          => 'key',
-                'uri'           => 'permission',
                 'name'          => 'permission',
+                'uri'           => 'admin/permission',
                 'title'         => 'Roles & Permissions',
                 'body'          => 'Permissions'
+            ],
+            [
+                'module_target' => 'sidebar-admin',
+                'position'      => '9.1-1',
+                'name'          => 'setting',
+                'icon'          => '',
+                'uri'           => 'admin/setting/global/update',
+                'title'         => 'Pengaturan Global',
+                'body'          => 'Global'
             ]
         ];
 
@@ -85,10 +86,10 @@ class MenuTableSeeder extends Seeder {
 
         $menus[0]->roles()->attach(3);
         $menus[1]->roles()->attach(3);
-        $menus[2]->roles()->attach(3);
+        $menus[2]->roles()->attach(2);
         $menus[3]->roles()->attach(2);
         $menus[4]->roles()->attach(2);
-        $menus[5]->roles()->attach(2);
+        $menus[5]->roles()->attach(1);
         $menus[6]->roles()->attach(1);
         $menus[7]->roles()->attach(1);
     }

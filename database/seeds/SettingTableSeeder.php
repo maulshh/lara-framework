@@ -42,6 +42,31 @@ class SettingTableSeeder extends Seeder {
                 'label'       => 'Modal Colors',
                 'type'        => 'string',
                 'string'      => 'primary'
+            ],
+            [
+                'module'      => 'json',
+                'name'        => 'banners',
+                'placeholder' => '[]',
+                'label'       => 'Banners JSON',
+                'type'        => 'text',
+                'text'      => "[
+                    {
+                        label: 'Carousel Home',
+                        name: 'carousel',
+                        width: 1500,
+                        height: 500,
+                        variants: [1, 2, 3, 4, 5, 6],
+                        location: 'images/banner/home/'
+                    },
+                    {
+                        label: 'Mini Banner Home',
+                        name: 'mini',
+                        width: 470,
+                        height: 250,
+                        variants: [1, 2, 3],
+                        location: 'images/banner/'
+                    }
+                ]"
             ]
         ];
 

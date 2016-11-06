@@ -6,15 +6,17 @@ use App\Http\Requests;
 use App\Menu;
 use App\Users\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class MenuController extends Controller {
+class MenuController extends Controller
+{
 
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
         $this->middleware('can:access-menu');
     }
@@ -24,11 +26,13 @@ class MenuController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $menus = Menu::getMenus('sidebar-admin');
         $targets = Menu::select('module_target')->distinct()->get();
+        $user = Auth::user();
 
-        return view('menu.index', compact('menus', 'targets'));
+        return view('menu.index', compact('menus', 'targets', 'user'));
     }
 
     /**
@@ -36,8 +40,11 @@ class MenuController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view('menu.create');
+    public function create()
+    {
+        $user = Auth::user();
+
+        return view('menu.create', compact('user'));
     }
 
     /**
@@ -46,19 +53,29 @@ class MenuController extends Controller {
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->validate($request, [
-            'module_target' => 'required|max:40',
-            'body'          => 'required|max:40',
-            'position'      => 'required|max:8',
-            'name'          => 'required|max:40',
-            'type'          => 'required|in:default,separator,parent',
-        ]);
+    public function store(Request $request)
+    {
+        $this->validate($request, Menu::getRules());
+
         $menu = Menu::create($request->all());
 
         $this->attachRole($request, $menu);
 
-        return redirect('/menu');
+        return redirect('admin/menu');
+    }
+
+    /**
+     * @param $request
+     * @param Menu $menu
+     */
+    private function attachRole($request, Menu $menu)
+    {
+        $to_attach = $request->only(Role::getNames());
+        $menu->roles()->detach();
+        foreach ($to_attach as $key => $value)
+            if ($value != null)
+                $menu->roles()->attach($value);
+
     }
 
     /**
@@ -67,8 +84,11 @@ class MenuController extends Controller {
      * @param  Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu) {
-        return view('menu.edit', compact('menu'));
+    public function edit(Menu $menu)
+    {
+        $user = Auth::user();
+
+        return view('menu.edit', compact('menu', 'user'));
     }
 
     /**
@@ -78,19 +98,15 @@ class MenuController extends Controller {
      * @param  Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu) {
-        $this->validate($request, [
-            'module_target' => 'required|max:40',
-            'body'          => 'required|max:40',
-            'position'      => 'required|max:8',
-            'name'          => 'required|max:40',
-            'type'          => 'required|in:default,separator,parent',
-        ]);
+    public function update(Request $request, Menu $menu)
+    {
+        $this->validate($request, Menu::getRules());
+
         $menu->update($request->all());
 
         $this->attachRole($request, $menu);
 
-        return redirect('/menu');
+        return redirect('admin/menu');
     }
 
     /**
@@ -99,22 +115,17 @@ class MenuController extends Controller {
      * @param  Menu $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu) {
+    public function destroy(Menu $menu)
+    {
         $menu->delete();
 
-        return redirect('/menu');
+        return redirect('admin/menu');
     }
 
-    /**
-     * @param $request
-     * @param Menu $menu
-     */
-    private function attachRole($request, Menu $menu) {
-        $to_attach = $request->only(Role::getNames());
-        $menu->roles()->detach();
-        foreach ($to_attach as $key => $value)
-            if ($value != null)
-                $menu->roles()->attach($value);
+    public function menuList($module)
+    {
+        $menus = Menu::getMenus($module);
 
+        return view('menu.editlist', compact('menus'));
     }
 }

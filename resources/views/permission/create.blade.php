@@ -1,10 +1,4 @@
-@extends('layouts.admin')
-
-<?php
-$user = Auth::user();
-$page_title = "Buat Permission Baru";
-$page = 'permission';
-?>
+@extends('layouts.admin', ['page_title' => "Buat Permission Baru", 'page' => 'permission'])
 
 @section('content')
     <div class="container">
@@ -22,4 +16,15 @@ $page = 'permission';
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @parent
+
+    <script>
+        const vue = new Vue({
+            el: 'body',
+            mixins: [store]
+        });
+    </script>
 @endsection

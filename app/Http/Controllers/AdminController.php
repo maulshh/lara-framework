@@ -2,85 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('can:view-dashboard');
+    }
+
     public function index()
     {
-        //
+        $user = Auth::user();
+        $banners = Setting::where('name', 'banners')->first();
+
+        return view('home', compact('user', 'banners'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function uploadImage(Request $request)
     {
-        //
-    }
+        $this->authorize('change-banner');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        /* * Todo
+         * Buat file uploader yang otomatis resize, rename, watermark, sesuai dengan setting yang diupload pengguna.
+         * */
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($request->file('image')->isValid()) {
+            $img = Image::make($request->file('image'));
+            $img->resize($request->input('width', 300), $request->input('height', null), function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            if ($img->save($request->input('path', 'images/uploads'). '/' .$request->input('name'))) {
+                flash('Upload sukses!', 'Berhasil!');
+            } else
+                flash('Maaf, image gagal diupload.', 'Upload gagal!', 'info');
+        } else
+            flash('Maaf, image yang diupload tidak sesuai', 'Upload gagal!', 'info');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return back();
     }
 }

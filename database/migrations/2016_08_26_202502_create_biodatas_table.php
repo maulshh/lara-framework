@@ -13,13 +13,14 @@ class CreateBiodatasTable extends Migration
     public function up()
     {
         Schema::create('biodatas', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->integer('id')->unsigned()->primary();
             $table->string('nama');
             $table->string('no_telp', 20);
             $table->string('bday_dd', 2);
             $table->string('bday_mm', 2);
             $table->string('bday_yy', 4);
             $table->string('jenis_kelamin', 1);
+            
             $table->text('bio');
             $table->string('avatar');
             $table->foreign('id')->references('id')->on('users')->onDelete('cascade');

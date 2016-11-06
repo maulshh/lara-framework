@@ -1,10 +1,4 @@
-@extends('layouts.admin')
-
-<?php
-$user = Auth::user();
-$page_title = "Edit Menu " . $menu->body;
-$page = 'menu';
-?>
+@extends('layouts.admin',['page_title' => "Edit Menu " . $menu->body, 'page' => 'menu'])
 
 @section('content')
     <div class="container">
@@ -19,7 +13,7 @@ $page = 'menu';
                     </div>
 
                     <div class="box-body">
-                        @include('menu.form', ['form_action' => 'menu/'.$menu->id, 'form_method' => 'PATCH'])
+                        @include('menu.form', ['form_action' => 'admin/menu/'.$menu->id, 'form_method' => 'PATCH'])
                     </div>
                     <div class="box-footer">
                         <div class="callout callout-default">
