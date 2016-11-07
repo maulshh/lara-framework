@@ -16,9 +16,7 @@ class CreateBiodatasTable extends Migration
             $table->integer('id')->unsigned()->primary();
             $table->string('nama');
             $table->string('no_telp', 20);
-            $table->string('bday_dd', 2);
-            $table->string('bday_mm', 2);
-            $table->string('bday_yy', 4);
+            $table->date('birthday');
             $table->string('jenis_kelamin', 1);
             
             $table->text('bio');

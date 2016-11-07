@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Users\Biodata;
 use App\Users\Role;
 use App\Users\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,11 +35,10 @@ class UserController extends Controller
         else
             $profile = User::with('biodata')
                 ->where('username', $username)->first();
-        if ($profile) {
-            $profile->append(['tanggal_lahir']);
 
+        if ($profile)
             return view('user.profile', compact('profile', 'user'));
-        } else
+        else
             return abort('404');
     }
 
@@ -72,9 +72,16 @@ class UserController extends Controller
             $img->save("images/user/$user->id.jpg");
 
             $user->biodata->avatar = "/images/user/$user->id.jpg";
-        }
+        } elseif ($request->file('avatar'))
+            $user->biodata->avatar = $request->file('avatar');
 
-        $user->biodata->update($request->all());
+        $user->biodata->update(array_merge([
+            'birthday' => Carbon::create($request->input('bday_yy'), $request->input('bday_mm'), $request->input('bday_dd'))], $request->only([
+            'nama',
+            'no_telp',
+            'jenis_kelamin',
+            'bio'
+        ])));
         flash('Profil kamu berhasil diubah!', 'Selesai');
 
         return back();
@@ -253,7 +260,7 @@ class UserController extends Controller
 
         $users = User::with('biodata', 'roles')
             ->join('biodatas', 'biodatas.id', '=', 'users.id')
-            ->select('username', 'email', 'users.id', 'users.created_at', 'biodatas.nama')
+            ->select('username', 'email', 'users.id', 'users.created_at', 'biodatas.nama', 'status')
             ->when($request->get('sort'), function ($query) use ($request) {
                 $sort = explode('|', $request->get('sort'));
 

@@ -19,9 +19,7 @@ $factory->define(App\Users\Biodata::class, function (Faker\Generator $faker) {
     return [
         'nama'          => $faker->name,
         'no_telp'       => $faker->phoneNumber,
-        'bday_dd'       => $faker->dayOfMonth,
-        'bday_mm'       => $faker->month,
-        'bday_yy'       => $faker->year,
+        'birthday'      => $faker->date('Y-m-d', 'now'),
         'jenis_kelamin' => $faker->randomElement(['l', 'p']),
         'bio'           => $faker->paragraph,
         'avatar'        => 'https://avatars1.githubusercontent.com/u/' . $faker->numberBetween(1, 52233) . '?v=3&s=80',
@@ -30,9 +28,9 @@ $factory->define(App\Users\Biodata::class, function (Faker\Generator $faker) {
 
 $factory->define(\App\Users\User::class, function (Faker\Generator $faker) {
     return [
-        'username'   => $faker->userName,
-        'email'      => $faker->safeEmail,
-        'password'   => bcrypt('password'),
+        'username' => $faker->userName,
+        'email'    => $faker->safeEmail,
+        'password' => bcrypt('password'),
     ];
 });
 

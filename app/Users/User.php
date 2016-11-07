@@ -45,12 +45,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-//Appends
-    public function getTanggalLahirAttribute($format = null)
-    {
-        return $this->biodata->bday_dd . '-' . $this->biodata->bday_mm . '-' . $this->biodata->bday_yy;
-    }
-
 //Relations
     public function alamats()
     {

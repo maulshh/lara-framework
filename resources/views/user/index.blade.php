@@ -144,7 +144,7 @@
                 }
             },
             methods: {
-                deleteForm: function (object, e) {
+                deleteForm(object, e) {
                     if (!confirm("Apa kamu yakin akan menghapus " + object + "?"))
                         e.preventDefault();
                     else if (e.target.tagName == 'A') {
@@ -185,7 +185,7 @@
                 }
             },
             methods: {
-                deleteForm: function (object, e) {
+                deleteForm(object, e) {
                     if (!confirm("Apa kamu yakin akan menghapus " + object + "?"))
                         e.preventDefault();
                     else if (e.target.tagName == 'A') {
@@ -250,24 +250,24 @@
                 moreParams: []
             },
             computed: {
-                apiUrl () {
+                apiUrl() {
                     return '{{url('/api/users')}}/' + this.role
                 }
             },
             watch: {
-                'perPage': function () {
+                perPage() {
                     this.$broadcast('vuetable:refresh')
                 },
-                'role': function () {
+                role() {
                     this.$broadcast('vuetable:refresh')
                 }
             },
             methods: {
                 //custom-field
-                mailto: function (value) {
+                mailto(value) {
                     return '<a href="mailto:' + value + '">' + value + '</a>'
                 },
-                gender: function (value) {
+                gender(value) {
                     return value == 'l'
                             ? '<span class="label label-info"><i class="glyphicon glyphicon-star"></i> Laki-laki</span>'
                             : value == 'p' ?
@@ -275,19 +275,19 @@
                             : '-'
                 },
                 //other methods
-                setFilter: function () {
+                setFilter() {
                     this.moreParams = [
                         'filter=' + this.searchFor
                     ]
-                    this.$nextTick(function () {
+                    this.$nextTick(function() {
                         this.$broadcast('vuetable:refresh')
                     })
                 },
-                resetFilter: function () {
+                resetFilter() {
                     this.searchFor = ''
                     this.setFilter()
                 },
-                preg_quote: function (str) {
+                preg_quote(str) {
                     // http://kevin.vanzonneveld.net
                     // +   original by: booeyOH
                     // +   improved by: Ates Goral (http://magnetiq.com)
@@ -302,16 +302,16 @@
 
                     return (str + '').replace(/([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
                 },
-                highlight: function (needle, haystack) {
+                highlight(needle, haystack) {
                     return haystack.replace(
                             new RegExp('(' + this.preg_quote(needle) + ')', 'ig'),
                             '<span class="highlight">$1</span>'
                     )
                 },
-                rowClassCB: function (data, index) {
+                rowClassCB(data, index) {
                     return (index % 2) === 0 ? 'positive' : ''
                 },
-                paginationConfig: function () {
+                paginationConfig() {
                     this.$broadcast('vuetable-pagination:set-options', {
                         wrapperClass: 'pagination',
                         icons: {first: '', prev: '', next: '', last: ''},

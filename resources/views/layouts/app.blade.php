@@ -49,7 +49,7 @@
     <script src="{{asset('dist/js/app.min.js')}}"></script>
 
     <script>
-        $(".kembali").click(function () {
+        $(".kembali").click(function() {
             history.go(-1);
         });
     </script>

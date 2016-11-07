@@ -5,5 +5,5 @@
         LaraFrame ver 0.1.14
     </div>
     {{-- Default to the left --}}
-    <strong>Copyright &copy; 2016 <a href="http://codemastery.net">CodeMastery</a>.</strong> All rights reserved.
+    <strong><a href="https://github.com/maulshh/lara-framework">Lara Framework</a></strong>
 </footer>

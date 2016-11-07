@@ -6,11 +6,11 @@
         data: {
             loading: true
         },
-        created () {
+        created() {
             this.loading = false;
         },
         methods: {
-            deleteForm: function (object, e) {
+            deleteForm(object, e) {
                 if (!confirm("Apa kamu yakin akan menghapus " + object + "?"))
                     e.preventDefault();
                 else if (e.target.tagName == 'A') {

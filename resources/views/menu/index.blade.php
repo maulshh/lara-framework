@@ -46,8 +46,8 @@
             el: 'body',
             mixins: [store],
             methods: {
-                getMenus: function (e) {
-                    this.$http.get('/api/menu/menu_list/' + e.target.value).then((response) => {
+                getMenus(e) {
+                    this.$http.get('/api/menu/menu_list/' + e.target.value).then(function(response) {
                         $("#menus").html(response.body);
                     })
                 }

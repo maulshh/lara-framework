@@ -29,7 +29,7 @@
                                     <dt><label>No Telp : </label></dt>
                                     <dd>@{{ user.biodata.no_telp }}</dd>
                                     <dt><label>Tanggal Lahir : </label></dt>
-                                    <dd>@{{ user.tanggal_lahir }}</dd>
+                                    <dd>@{{ user.biodata.birthday.substr(0,10) }}</dd>
                                     <dt><label>Jenis Kelamin : </label></dt>
                                     <dd>@{{ user.biodata.jenis_kelamin == 'l' ? "Laki Laki" : user.biodata.jenis_kelamin == 'p' ? "Perempuan" :'-' }}</dd>
                                 </dl>
@@ -102,7 +102,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-3 pr-5">
                                                             <select class="form-control" name="bday_dd" id="sel-date"
-                                                                    :value="user.biodata.bday_dd">
+                                                                    :value="user.biodata.birthday.substr(8, 2)">
                                                                 <option value="" disabled>Tanggal</option>
                                                                 <option value="01">1</option>
                                                                 <option value="02">2</option>
@@ -139,7 +139,7 @@
                                                         </div>
                                                         <div class="col-xs-4 pl-5 pr-5">
                                                             <select class="form-control" name="bday_mm" id="sel-month"
-                                                                    :value="user.biodata.bday_mm">
+                                                                    :value="user.biodata.birthday.substr(5, 2)">
                                                                 <option value="" disabled>Bulan</option>
                                                                 <option value="01">January</option>
                                                                 <option value="02">February</option>
@@ -157,7 +157,7 @@
                                                         </div>
                                                         <div class="col-xs-3 pl-5">
                                                             <select class="form-control" name="bday_yy" id="sel-year"
-                                                                    :value="user.biodata.bday_yy">
+                                                                    :value="user.biodata.birthday.substr(0, 4)">
                                                                 <option value="" disabled>Tahun</option>
                                                                 <option value="2012">2012</option>
                                                                 <option value="2011">2011</option>
@@ -234,7 +234,8 @@
                                         <v-option v-for="item in alamats"
                                                   :value="item.id">@{{item.nama_alamat}}</v-option>
                                     </v-select>
-                                    <button class="btn btn-default" @click="alamat.id = 0" type="button">Buat Alamat Baru</button>
+                                    <button class="btn btn-default" @click="alamat.id = 0" type="button">Buat Alamat
+                                    Baru</button>
                                     <alamat-form :alamat.sync="alamat"></alamat-form>
                                 </tab>
                             @endif
@@ -280,9 +281,9 @@
                 tab: VueStrap.tab
             },
             watch: {
-                'alamat.id': function (val) {
+                'alamat.id': function(val) {
                     if (val) {
-                        var alamat = this.alamats.filter(function (item) {
+                        var alamat = this.alamats.filter(function(item) {
                             return item.id == val;
                         });
                         this.alamat = jQuery.extend(true, {}, alamat[0]); //clone the object

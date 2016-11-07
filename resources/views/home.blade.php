@@ -66,10 +66,10 @@
                 banners: {!! $banners->value !!}
             },
             computed: {
-                banner(){
+                banner() {
                     return this.banners[this.selected_banner]
                 },
-                fileName(){
+                fileName() {
                     return this.banner.name + (this.banner.variants && this.banner.variants.length ?
                             '-' + this.banner.variants[this.selected_variant] : '') + '.jpg';
                 }
