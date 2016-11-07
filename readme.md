@@ -1,6 +1,6 @@
 #LaraFrame is a laravel quickstart.
 
-Using laravel, bootstrap, vueJS and an admin template (for now its admin LTE), we create a base for creating web apps.
+Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.com">bootstrap</a>, <a href="https://vuejs.org">vueJS</a> and an admin template (for now its <a href="https://almsaeedstudio.com">admin LTE</a>), we create a base for creating web apps.
 
 ### The features on LaraFrame are:
 + User with dynamic roles and permission.
