@@ -47,3 +47,6 @@ Using laravel, bootstrap, vueJS and an admin template (for now its admin LTE), w
    ```
    php artisan serve
    ```
+9. Username and password for each roles are:
+   + Webmaster : webmaster@laraframe.com / password
+   + Admin : admin@laraframe.com / password
