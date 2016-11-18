@@ -56,7 +56,7 @@
 
     <script>
         const vue = new Vue({
-            el: 'body',
+            el: '#vue-container',
             mixins: [store]
         });
     </script>

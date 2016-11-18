@@ -1,6 +1,6 @@
 <script>
     Vue.component('alert', VueStrap.alert)
-    Vue.config.debug = false
+    Vue.config.silent = true
 
     var store = {
         data: {

@@ -10,7 +10,9 @@
     <div class="content-wrapper">
         {{-- Content Header (Page header) --}}
         <section class="content-header">
-            <button class="btn btn-default btn-sm kembali pull-right" type="button"><i class="fa fa-arrow-left"></i> Kembali</button>
+            <button class="btn btn-default btn-sm kembali pull-right" type="button"><i class="fa fa-arrow-left"></i>
+                Kembali
+            </button>
             <h1>
                 {{ $page_title or APP_TITLE }}
                 <small>{{ $page_description or null }}</small>

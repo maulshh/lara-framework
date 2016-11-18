@@ -42,7 +42,7 @@
 
     <script>
         const vue = new Vue({
-            el: 'body',
+            el: '#vue-container',
             data: {
             },
             mixins: [store]
