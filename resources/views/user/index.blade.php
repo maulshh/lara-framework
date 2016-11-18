@@ -1,73 +1,71 @@
 @extends('layouts.admin', ['page_title' => "User Management", 'page' => 'user'])
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-solid box-{{TMP_COLOR}}">
-                    <div class="box-header">
-                        <div class="box-tools">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-solid box-{{TMP_COLOR}}">
+                <div class="box-header">
+                    <div class="box-tools">
+                    </div>
+                    <h3 class="box-title">Manage User</h3>
+                </div>
+
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-7 form-inline">
+                            <div class="form-inline form-group">
+                                <label>Search:</label>
+                                <input v-model="searchFor" class="form-control" @keyup.enter="setFilter">
+                                <button class="btn btn-primary" @click="setFilter">Go</button>
+                                <button class="btn btn-default" @click="resetFilter">Reset</button>
+                            </div>
                         </div>
-                        <h3 class="box-title">Manage User</h3>
+                        <div class="col-md-5">
+                            <div class="form-inline form-group pull-right">
+                                <label> &nbsp; &nbsp; &nbsp; Per Page: </label>
+                                <select class="form-control" v-model="perPage">
+                                    <option value=10>10</option>
+                                    <option value=15>15</option>
+                                    <option value=20>20</option>
+                                    <option value=25>25</option>
+                                </select>
+                            </div>
+                            <div class="form-inline form-group pull-right">
+                                <label>Role: </label>
+                                <select class="form-control" v-model="role">
+                                    <option value="all">All</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-7 form-inline">
-                                <div class="form-inline form-group">
-                                    <label>Search:</label>
-                                    <input v-model="searchFor" class="form-control" @keyup.enter="setFilter">
-                                    <button class="btn btn-primary" @click="setFilter">Go</button>
-                                    <button class="btn btn-default" @click="resetFilter">Reset</button>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-inline form-group pull-right">
-                                    <label> &nbsp; &nbsp; &nbsp; Per Page: </label>
-                                    <select class="form-control" v-model="perPage">
-                                        <option value=10>10</option>
-                                        <option value=15>15</option>
-                                        <option value=20>20</option>
-                                        <option value=25>25</option>
-                                    </select>
-                                </div>
-                                <div class="form-inline form-group pull-right">
-                                    <label>Role: </label>
-                                    <select class="form-control" v-model="role">
-                                        <option value="all">All</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="table-responsive">
-                            <vuetable v-ref:vuetable
-                                      :api-url="apiUrl"
-                                      pagination-path=""
-                                      :fields="fields"
-                                      :sort-order="sortOrder"
-                                      :multi-sort="multiSort"
-                                      table-class="table table-bordered table-striped table-hover"
-                                      ascending-icon="glyphicon glyphicon-chevron-up"
-                                      descending-icon="glyphicon glyphicon-chevron-down"
-                                      pagination-class=""
-                                      pagination-info-class=""
-                                      pagination-component-class=""
-                                      :pagination-component="paginationComponent"
-                                      :item-actions="itemActions"
-                                      :append-params="moreParams"
-                                      :per-page="perPage"
-                                      wrapper-class="vuetable-wrapper"
-                                      table-wrapper=".vuetable-wrapper"
-                                      loading-class="loading"
-                                      detail-row-component="my-detail-row"
-                                      detail-row-id="id"
-                                      detail-row-transition="expand"
-                                      row-class-callback="rowClassCB"
-                                      :pagination-info-template="paginationInfoTemplate"
-                            ></vuetable>
-                        </div>
+                    <div class="table-responsive">
+                        <vuetable v-ref:vuetable
+                                  :api-url="apiUrl"
+                                  pagination-path=""
+                                  :fields="fields"
+                                  :sort-order="sortOrder"
+                                  :multi-sort="multiSort"
+                                  table-class="table table-bordered table-striped table-hover"
+                                  ascending-icon="glyphicon glyphicon-chevron-up"
+                                  descending-icon="glyphicon glyphicon-chevron-down"
+                                  pagination-class=""
+                                  pagination-info-class=""
+                                  pagination-component-class=""
+                                  :pagination-component="paginationComponent"
+                                  :item-actions="itemActions"
+                                  :append-params="moreParams"
+                                  :per-page="perPage"
+                                  wrapper-class="vuetable-wrapper"
+                                  table-wrapper=".vuetable-wrapper"
+                                  loading-class="loading"
+                                  detail-row-component="my-detail-row"
+                                  detail-row-id="id"
+                                  detail-row-transition="expand"
+                                  row-class-callback="rowClassCB"
+                                  :pagination-info-template="paginationInfoTemplate"
+                        ></vuetable>
                     </div>
                 </div>
             </div>
@@ -279,7 +277,7 @@
                     this.moreParams = [
                         'filter=' + this.searchFor
                     ]
-                    this.$nextTick(function() {
+                    this.$nextTick(function () {
                         this.$broadcast('vuetable:refresh')
                     })
                 },

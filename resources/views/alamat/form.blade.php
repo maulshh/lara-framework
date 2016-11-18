@@ -98,12 +98,12 @@
         },
         methods: {
             getDistricts() {
-                this.$http.get('/api/region/districts/' + this.alamat.kota).then(function(response) {
+                this.$http.get('/api/region/districts/' + this.alamat.kota).then(function (response) {
                     this.kecamatan = JSON.parse(response.body);
                 })
             },
             getCities() {
-                this.$http.get('/api/region/cities/' + this.alamat.provinsi).then(function(response) {
+                this.$http.get('/api/region/cities/' + this.alamat.provinsi).then(function (response) {
                     this.kota = JSON.parse(response.body);
                 })
             }
@@ -113,10 +113,10 @@
             this.getCities();
         },
         watch: {
-            'alamat.provinsi': function() {
+            'alamat.provinsi': function () {
                 this.getCities();
             },
-            'alamat.kota': function() {
+            'alamat.kota': function () {
                 this.getDistricts();
             }
         }

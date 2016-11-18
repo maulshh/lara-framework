@@ -1,4 +1,4 @@
-@extends('layouts.front.app' ,['page_title' => $profile->biodata->nama, 'page' => $profile->username])
+@extends('layouts.front.app', ['page_title' => $profile->biodata->nama, 'page' => $profile->username])
 
 @section('content')
     <section class="overflow-hidden why-us-half-image-wrapper">
@@ -281,9 +281,9 @@
                 tab: VueStrap.tab
             },
             watch: {
-                'alamat.id': function(val) {
+                'alamat.id': function (val) {
                     if (val) {
-                        var alamat = this.alamats.filter(function(item) {
+                        var alamat = this.alamats.filter(function (item) {
                             return item.id == val;
                         });
                         this.alamat = jQuery.extend(true, {}, alamat[0]); //clone the object
