@@ -10,7 +10,7 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
 + Dynamic settings and easily customizable
 
 ### Prerequisite:
-+ Environment for <a href="https://laravel.com/docs/5.2/#server-requirements">laravel 5.2 </a> (PHP >= 5.5.9, ..)
++ Environment for <a href="https://laravel.com/docs/5.3/#server-requirements">laravel 5.3 </a> (PHP >= 5.5.9, ..)
 + PHP <a href="https://getcomposer.org">Composer</a> installed
 + Also <a href="https://nodejs.org/en/download">npm latest version</a> (npm v3.8.x and node 6.x.x) *optional
 
@@ -18,7 +18,7 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
 
 1. Prepare a database, can be mysql, sqlite, etc.
 
-2. Create `/.env` file and also `/config/database.php` file
+2. Create `/.env` file
 
 3. do composer install
    ```
@@ -30,7 +30,7 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
    php artisan key:generate
    ```
 
-5. Edit .env and config/database.php based on your database setting.
+5. Edit .env your database setting.
 
 6. Use php artisan migrate to create database tables and also `--seed` for the dummy data.
    ```
@@ -41,7 +41,10 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
    ```
    npm install
    ```
-   this is optional. if you don't really use node for development and only use plain javascript you may skip these.
+   gulp dependencies
+      ```
+      gulp --production
+      ```
 
 8. Serve your lara-frame on http://localhost:8000
    ```
