@@ -1,5 +1,5 @@
 @extends('layouts.front.app', [
-    'page_title' => 'Buat Data Alamat',
+    'page_title' => 'Ubah Data Alamat',
     'page' => 'alamat'
 ])
 
@@ -9,12 +9,13 @@
             <div class="col-md-8">
                 <div class="why-us-half-image-content">
                     <div class="section-title text-left">
-                        <h3>Update Alamat!</h3>
+                        <h3>Ubah Alamat!</h3>
                         <p>Isi detail alamat kamu pada form berikut:</p>
                     </div>
 
                     <div class="">
-                        @include('alamat.form', ['form_action' => 'alamat/'.$alamat->id, 'form_method' => 'PATCH'])
+                        <alamat-form :alamat.sync="alamat"></alamat-form>
+                        @include('layouts.errors')
                     </div>
                 </div>
             </div>
@@ -29,6 +30,9 @@
         const vue = new Vue({
             el: '#vue-container',
             mixins: [store],
+            data: {
+                alamat: {!! $alamat !!}
+            },
             components: {
                 vSelect: VueStrap.select,
                 vOption: VueStrap.option,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Users;
+namespace App;
 
 
 trait HasRoles

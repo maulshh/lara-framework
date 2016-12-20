@@ -1,30 +1,24 @@
 <?php
 
-namespace App\Users;
-
-use App\Menu;
-use App\Statusable;
-use App\Validator;
+namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-
-    use Validator;
-    use Statusable;
-    use HasRoles;
-
-    protected static $rules = [
-        'username' => 'required|unique:users,username',
-        'email'    => 'required|unique:users,email',
-    ];
+    use Notifiable, Validator, Statusable, HasRoles;
 
     protected static $status_list = [
         0  => 'recently created',
         1  => 'completed',
         2  => 'verified',
         -1 => 'banned'
+    ];
+
+    protected static $rules = [
+        'username' => 'required|unique:users,username',
+        'email'    => 'required|unique:users,email',
     ];
 
     /**
@@ -68,7 +62,7 @@ class User extends Authenticatable
         return Menu::when($module_target, function ($query) use ($module_target) {
             return $query->where('module_target', $module_target);
         })->whereHas('roles', function ($query) {
-            $query->whereIn('id', $this->roles()->lists('id'));
+            $query->whereIn('id', $this->roles()->pluck('id'));
         })->orderBy('position')->get();
     }
 
@@ -97,16 +91,5 @@ class User extends Authenticatable
         }
 
         return $alamat;
-    }
-
-    public function completeData($array)
-    {
-        $this->kelas = $array['kelas'];
-        $this->sekolah = $array['sekolah'];
-
-        $this->grade()->associate($array['grade_id']);
-        $this->wilayah()->associate($array['wilayah_id']);
-        $this->status = 1;
-        $this->save();
     }
 }

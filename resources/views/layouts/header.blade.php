@@ -19,22 +19,24 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li><a href="{{ url('login') }}">Login</a></li>
+                    <li><a href="{{ url('register') }}">Register</a></li>
                 @else
                     {{-- User Account Menu --}}
                     <li class="dropdown user user-menu">
                         {{-- Menu Toggle Button --}}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{-- The user image in the navbar--}}
-                            <img src="{{ $user->biodata->avatar? asset($user->biodata->avatar) : asset("images/user/default.jpg") }}" class="user-image" alt="User Image">
+                            <img src="{{ $user->biodata->avatar? asset($user->biodata->avatar) : asset("images/user/default.jpg") }}"
+                                 class="user-image" alt="User Image">
                             {{-- hidden-xs hides the username on small devices so only the image appears. --}}
                             <span class="hidden-xs">{{ strtoupper(substr($user->username, 0, 1)) . substr($user->username, 1) }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             {{-- The user image in the menu --}}
                             <li class="user-header">
-                                <img src="{{ $user->biodata->avatar? asset($user->biodata->avatar) : asset("images/user/default.jpg") }}" class="img-circle" alt="User Image">
+                                <img src="{{ $user->biodata->avatar? asset($user->biodata->avatar) : asset("images/user/default.jpg") }}"
+                                     class="img-circle" alt="User Image">
 
                                 <p>
                                     {{ $user->biodata->nama }} - {{ $user->roles()->first()->label }}
@@ -46,9 +48,9 @@
                             <li class="user-body">
                                 <div class="row">
                                     @can('view-dashboard')
-                                    <div class="col-xs-4 text-center">
-                                        <a href="{{url('home')}}">Dashboard</a>
-                                    </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="{{url('home')}}">Dashboard</a>
+                                        </div>
                                     @endcan
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Friends</a>
@@ -62,17 +64,26 @@
                                     <a href="{{url('profile')}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
+                                       onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                                        Sign out
+                                    </a>
+
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
                                 </div>
                             </li>
                         </ul>
                     </li>
                 @endif
                 @can('view-dashboard')
-                        {{-- Control Sidebar Toggle Button --}}
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+                    {{-- Control Sidebar Toggle Button --}}
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li>
                 @endcan
             </ul>
         </div>

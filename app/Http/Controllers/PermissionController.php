@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Users\Permission;
-use App\Users\Role;
+use App\Permission;
+use App\Role;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 class PermissionController extends Controller

@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Users;
+namespace App;
 
-use App\Menu;
-use App\Validator;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model

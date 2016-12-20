@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateBiodatasTable extends Migration
 {
@@ -15,12 +16,12 @@ class CreateBiodatasTable extends Migration
         Schema::create('biodatas', function (Blueprint $table) {
             $table->integer('id')->unsigned()->primary();
             $table->string('nama');
-            $table->string('no_telp', 20);
-            $table->date('birthday');
-            $table->string('jenis_kelamin', 1);
+            $table->string('no_telp', 20)->nullable();
+            $table->date('birthdate')->nullable();
+            $table->string('gender', 1)->nullable();
             
-            $table->text('bio');
-            $table->string('avatar');
+            $table->text('bio')->nullable();
+            $table->string('avatar')->default('/images/user/default.jpg');
             $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -33,6 +34,6 @@ class CreateBiodatasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('biodatas');
+        Schema::dropIfExists('biodatas');
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Setting;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 

@@ -254,7 +254,6 @@
 
 @section('script')
     @parent
-    @include('alamat.form')
 
     <script>
         const vue = new Vue({

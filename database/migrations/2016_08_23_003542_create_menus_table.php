@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateMenusTable extends Migration
 {
@@ -16,10 +17,10 @@ class CreateMenusTable extends Migration
             $table->increments('id');
             $table->string('module_target', 40);
             $table->string('position', 8);
-            $table->string('icon', 25);
-            $table->string('uri');
-            $table->string('title', 50);
-            $table->string('name', 40);
+            $table->string('icon', 25)->nullable();
+            $table->string('uri')->nullable();
+            $table->string('title', 50)->nullable();
+            $table->string('name', 40)->nullable();
             $table->string('body', 40);
             $table->string('type', 15)->default('default');
             $table->unique(['position', 'module_target']);
@@ -51,7 +52,7 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menu_role');
-        Schema::drop('menus');
+        Schema::dropIfExists('menu_role');
+        Schema::dropIfExists('menus');
     }
 }

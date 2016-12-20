@@ -17,7 +17,7 @@ class RoleTableSeeder extends Seeder {
         ];
 
         foreach ($roles as $role) {
-            factory(\App\Users\Role::class)->create($role);
+            factory(\App\Role::class)->create($role);
         }
 
         $permissions = [
@@ -29,10 +29,11 @@ class RoleTableSeeder extends Seeder {
             ['name' => 'access-role', 'label' => 'Access All Roles'],
             ['name' => 'manage-user', 'label' => 'Manage Users'],
             ['name' => 'change-banner', 'label' => 'Change Banner'],
+            ['name' => 'manage-admin', 'label' => 'Manage Admins'],
         ];
 
         for ($i = 0; $i < count($permissions); $i++) {
-            $permissions[$i] = factory(\App\Users\Permission::class)->create($permissions[$i]);
+            $permissions[$i] = factory(\App\Permission::class)->create($permissions[$i]);
         }
 
         $permissions[0]->roles()->attach(3);
@@ -43,5 +44,6 @@ class RoleTableSeeder extends Seeder {
         $permissions[5]->roles()->attach(1);
         $permissions[6]->roles()->attach(2);
         $permissions[7]->roles()->attach(2);
+        $permissions[8]->roles()->attach(1);
     }
 }

@@ -2,25 +2,27 @@
 <html lang="en">
 <head>
     @section('head')
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
 
         <title>{{ APP_TITLE }} - {{ $page_title or APP_MOTTO }}</title>
 
         {{-- for Google --}}
         <meta name="description" content="{{APP_MOTTO}}">
         <meta name="keywords"
-              content="laraframe, laraframe.com, frame, work, framework, laravel, vue, admin-lte, vue-table, vue-strap">
+              content="{{ APP_TITLE }}, {{ APP_TITLE }}.com, frame, work, framework, laravel, vue, admin-lte, vue-table, vue-strap">
 
-        <meta name="author" content="laraframe">
-        <meta name="copyright" content="Laraframe">
-        <meta name="application-name" content="laraframe.com">
+        <meta name="author" content="{{ APP_TITLE }}">
+        <meta name="copyright" content="{{ APP_TITLE }}">
+        <meta name="application-name" content="{{ APP_TITLE }}.com">
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+        {{-- CSRF Token --}}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         {{-- CSS Plugins --}}
         <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/animate.css/animate.min.css"/>
 
         {{-- Font Awesome --}}
         <link rel="stylesheet" href="https://unpkg.com/font-awesome/css/font-awesome.min.css">
@@ -38,41 +40,52 @@
         <link rel="stylesheet" href="{{asset('laraframe/main.css')}}">
         <link rel="stylesheet" href="{{asset('laraframe/component.css')}}">
         <link rel="stylesheet" href="{{asset('laraframe/style.css')}}">
+
+        <!-- Scripts -->
+        <script>
+            window.Laravel = <?php echo json_encode([
+                    'csrfToken' => csrf_token(),
+            ]); ?>
+        </script>
     @show
 </head>
 
-<body>
-<div class="container-wrapper" id="vue-container">
-    <div id="introLoader" class="introLoading introLoader gifLoader theme-dark bubble" v-show="loading">
-        <div id="introLoaderSpinner" class="gifLoaderInner" style=""></div>
+<body class="{{$body_class or ''}}">
+    <div class="container-wrapper" id="vue-container">
+        <div id="introLoader" class="introLoading introLoader gifLoader theme-dark bubble" v-show="loading">
+            <div id="introLoaderSpinner" class="gifLoaderInner" style=""></div>
+        </div>
+
+        @include('layouts.front.header')
+
+        <div class="clear"></div>
+
+        {{-- start Main Wrapper --}}
+        <div class="main-wrapper">
+            @yield('content')
+        </div>
+        {{-- end Main Wrapper --}}
+
+        @include('layouts.front.footer')
+
+    </div>
+    {{-- end Container Wrapper --}}
+
+    <div id="back-to-top" style="display: block;">
+        <a href="#"><i class="fa fa-angle-up"></i></a>
     </div>
 
-    {{-- start Container Wrapper --}}
-    @include('layouts.front.header')
+    @section('script')
+        {{--for now vuestrap only compatible with vue1--}}
+        {{--<script src="https://unpkg.com/vue@2/dist/vue.min.js"></script>--}}
+        <script src="https://unpkg.com/vue@1/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-resource/dist/vue-resource.min.js"></script>
+        <script src="https://unpkg.com/vue-strap@1/dist/vue-strap.min.js"></script>
 
-    <div class="clear"></div>
+        {{-- App JS --}}
+        <script src="/js/front.js"></script>
 
-    {{-- start Main Wrapper --}}
-    <div class="main-wrapper">
-        @yield('content')
-    </div>
-    {{-- end Main Wrapper --}}
-
-    @include('layouts.front.footer')
-
-</div>
-{{-- end Container Wrapper --}}
-
-@section('script')
-    {{-- JS --}}
-    <script src="https://unpkg.com/vue@1/dist/vue.min.js"></script>
-    {{--for now vuestrap only compatible with vue1--}}
-    {{--<script src="https://unpkg.com/vue@2/dist/vue.min.js"></script>--}}
-    <script src="https://unpkg.com/vue-resource/dist/vue-resource.min.js"></script>
-    <script src="https://unpkg.com/vue-strap@1/dist/vue-strap.min.js"></script>
-
-    @include('script.vue.store')
-    @include('layouts.flash_message')
-@show
+        @include('layouts.flash_message')
+    @show
 </body>
 </html>

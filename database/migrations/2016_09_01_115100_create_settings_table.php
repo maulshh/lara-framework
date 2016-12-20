@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSettingsTable extends Migration
 {
@@ -18,7 +19,7 @@ class CreateSettingsTable extends Migration
             $table->string('name', 40);
             $table->string('label', 40);
             $table->boolean('boot')->default(true);
-            $table->string('placeholder');
+            $table->string('placeholder')->nullable();
             $table->integer('number')->nullable();
             $table->date('date')->nullable();
             $table->string('string')->nullable();
@@ -36,6 +37,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::dropIfExists('settings');
     }
 }

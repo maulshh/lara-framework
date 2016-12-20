@@ -49,4 +49,9 @@ trait Statusable
     {
         return array_search($string, self::$status_list);
     }
+
+    public static function statusString($id)
+    {
+        return isset(self::$status_list[$id]) ? self::$status_list[$id] : null;
+    }
 }

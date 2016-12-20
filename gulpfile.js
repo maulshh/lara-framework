@@ -1,5 +1,10 @@
-var elixir = require('laravel-elixir');
+const elixir = require('laravel-elixir');
 
-elixir(function (mix) {
-    mix.sass('app.scss');
+require('laravel-elixir-vue');
+
+elixir((mix) => {
+    mix
+    // .sass('app.scss')
+        .webpack('app.js')
+        .webpack('front.js');
 });

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Users;
+namespace App;
 
-use App\Validator;
 use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model

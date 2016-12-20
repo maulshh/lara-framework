@@ -55,7 +55,10 @@ return [
     |
     */
 
-    'from' => ['address' => "support@startlaravel.com", 'name' => "Start Laravel!"],
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'Example'),
+    ],
 
     /*
     |--------------------------------------------------------------------------

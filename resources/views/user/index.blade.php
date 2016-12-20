@@ -156,7 +156,7 @@
 
         Vue.component('custom-action', {
             template: [`
-                <form action="/admin/user/@{{ rowData.id }}/role/admin" method="POST" v-if="rowData.roles[0].id > {{App\Users\Role::getId('admin')}}">
+                <form action="/admin/user/@{{ rowData.id }}/role/admin" method="POST" v-if="rowData.roles[0].id > {{App\Role::getId('admin')}}">
                     {{method_field('PUT')}}
                     {{csrf_field()}}
                     <a href="#" onclick="this.parentNode.submit()" class="text-green"><i class="fa fa-plus"></i> Jadikan Admin</a>

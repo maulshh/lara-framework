@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Users\Alamat;
+use App\Alamat;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 class AlamatController extends Controller

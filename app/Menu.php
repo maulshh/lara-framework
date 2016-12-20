@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Users\Role;
 use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model

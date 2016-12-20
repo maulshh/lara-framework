@@ -15,6 +15,7 @@
 
                     <div class="">
                         <alamat-form :alamat.sync="alamat"></alamat-form>
+                        @include('layouts.errors')
                     </div>
                 </div>
             </div>
@@ -24,13 +25,14 @@
 
 @section('script')
     @parent
-    @include('alamat.form')
 
     <script>
         const vue = new Vue({
             el: '#vue-container',
             mixins: [store],
-            data: {},
+            data: {
+                alamat: {!! $alamat !!}
+            },
             components: {
                 vSelect: VueStrap.select,
                 vOption: VueStrap.option,

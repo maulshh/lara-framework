@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Users;
+namespace App;
 
 use App\Http\Utilities\Region;
-use App\Validator;
 use Illuminate\Database\Eloquent\Model;
 
 class Alamat extends Model

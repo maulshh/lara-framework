@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin'], function () {
 //API Routes
 Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
     Route::group(['prefix' => 'region', 'as' => 'region.'], function () {
+        Route::get('provinces', 'UtilitiesController@getProvinces');
         Route::get('cities/{p_id}', 'UtilitiesController@getCities');
         Route::get('districts/{k_id}', 'UtilitiesController@getDistricts');
     });

@@ -1,6 +1,8 @@
-/.idea
-/vendor
 /node_modules
-/config/database.php
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
 .env
-/public/images/*

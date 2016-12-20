@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Users\Biodata;
-use App\Users\Role;
-use App\Users\User;
+use App\Biodata;
+use App\Role;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,10 +75,10 @@ class UserController extends Controller
             $user->biodata->avatar = $request->file('avatar');
 
         $user->biodata->update(array_merge([
-            'birthday' => Carbon::create($request->input('bday_yy'), $request->input('bday_mm'), $request->input('bday_dd'))], $request->only([
+            'birthdate' => Carbon::create($request->input('bday_yy'), $request->input('bday_mm'), $request->input('bday_dd'))], $request->only([
             'nama',
             'no_telp',
-            'jenis_kelamin',
+            'gender',
             'bio'
         ])));
         flash('Profil kamu berhasil diubah!', 'Selesai');
