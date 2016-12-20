@@ -14,6 +14,13 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
 + PHP <a href="https://getcomposer.org">Composer</a> installed
 + Also <a href="https://nodejs.org/en/download">npm latest version</a> (npm v3.8.x and node 6.x.x) *optional
 
+### Download:
+
+To clone this branch repo (laravel 5.3 and vue 1.x)
+```
+git clone -b laravel5.3-vue1.x https://github.com/maulshh/lara-framework.git --single-branch
+```
+
 ### Installation:
 
 1. Prepare a database, can be mysql, sqlite, etc.
