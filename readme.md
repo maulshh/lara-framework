@@ -49,9 +49,9 @@ git clone -b laravel5.3-vue1.x https://github.com/maulshh/lara-framework.git --s
    npm install
    ```
    gulp dependencies
-      ```
-      gulp --production
-      ```
+   ```
+   gulp --production
+   ```
 
 8. Serve your lara-frame on http://localhost:8000
    ```
