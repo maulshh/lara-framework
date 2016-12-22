@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('facebook_id')->unique()->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
 
             $table->rememberToken();
             $table->timestamps();
