@@ -10,9 +10,9 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
 + Dynamic settings and easily customizable
 
 ### Prerequisite:
-+ Environment for <a href="https://laravel.com/docs/5.3/#server-requirements">laravel 5.3 </a> (PHP >= 5.5.9, ..)
++ Environment for <a href="https://laravel.com/docs/5.3/#server-requirements">laravel 5.3 </a> (PHP >= 5.6.4, ..)
 + PHP <a href="https://getcomposer.org">Composer</a> installed
-+ Also <a href="https://nodejs.org/en/download">npm latest version</a> (npm v3.8.x and node 6.x.x) *optional
++ Also <a href="https://nodejs.org/en/download">npm latest version</a> (npm v3.8.x and node 6.x.x)
 
 ### Download:
 
