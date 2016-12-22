@@ -16,9 +16,9 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
 
 ### Download:
 
-To clone this branch repo (laravel 5.3 and vue 1.x)
+To clone this repo (dev branch)
 ```
-git clone -b laravel5.3-vue1.x https://github.com/maulshh/lara-framework.git --single-branch
+git clone https://github.com/maulshh/lara-framework.git
 ```
 
 ### Installation:
