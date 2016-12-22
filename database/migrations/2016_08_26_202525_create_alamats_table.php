@@ -21,7 +21,7 @@ class CreateAlamatsTable extends Migration {
             $table->string('kecamatan', 7)->nullable();
             $table->string('alamat')->nullable();
             $table->string('nama_penerima', 40)->nullable();
-            $table->string('no_telp', 20)->nullable();
+            $table->string('no_telp', 30)->nullable();
             $table->string('kode_pos', 10)->nullable();
             $table->text('keterangan')->nullable();
             $table->integer('defaulted_to_user_id')->unsigned()->nullable()->unique();

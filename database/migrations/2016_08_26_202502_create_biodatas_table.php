@@ -16,7 +16,7 @@ class CreateBiodatasTable extends Migration
         Schema::create('biodatas', function (Blueprint $table) {
             $table->integer('id')->unsigned()->primary();
             $table->string('nama');
-            $table->string('no_telp', 20)->nullable();
+            $table->string('no_telp', 30)->nullable();
             $table->date('birthdate')->nullable();
             $table->string('gender', 1)->nullable();
             
