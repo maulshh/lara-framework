@@ -25,26 +25,19 @@ git clone https://github.com/maulshh/lara-framework.git
 
 1. Prepare a database, can be mysql, sqlite, etc.
 
-2. Create `/.env` file
-
-3. do composer install
+2. do composer install
    ```
    composer install
    ```
 
-4. For security, generate key using
-   ```
-   php artisan key:generate
-   ```
+3. Edit .env based on your database setting.
 
-5. Edit .env your database setting.
-
-6. Use php artisan migrate to create database tables and also `--seed` for the dummy data.
+4. Use php artisan migrate to create database tables and also `--seed` for the dummy data.
    ```
    php artisan migrate --seed
    ```
 
-7. load the javascript node libraries using npm install
+5. load the javascript node libraries using npm install
    ```
    npm install
    ```
@@ -53,11 +46,11 @@ git clone https://github.com/maulshh/lara-framework.git
    gulp --production
    ```
 
-8. Serve your lara-frame on http://localhost:8000
+6. Serve your lara-frame on http://localhost:8000
    ```
    php artisan serve
    ```
 
-9. Username and password for each roles are:
-   + Webmaster : webmaster@laraframe.com / password
-   + Admin : admin@laraframe.com / password
+7. Username and password for each roles are:
+   + Webmaster : webmaster@bengkel.com / password
+   + Admin : admin@bengel.com / password

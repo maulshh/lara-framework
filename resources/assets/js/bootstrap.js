@@ -18,8 +18,6 @@ Vue.http.interceptors.push((request, next) => {
 
  **/
 
-Vue.component('alert', VueStrap.alert);
-
 // Global Mixins for Vue and Component instances
 window.store = {
     data: {
@@ -28,8 +26,12 @@ window.store = {
     created() {
         this.loading = false;
     },
+    components: {
+        alert: VueStrap.alert
+    },
     methods: {
         /** Todo
+         *
          * nantinya ini akan dipindah sebagai directive!!
          **/
         deleteForm(object, e) {

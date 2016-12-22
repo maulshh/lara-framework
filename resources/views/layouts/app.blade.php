@@ -16,7 +16,7 @@
         {{-- Font Awesome --}}
         <link rel="stylesheet" href="https://unpkg.com/font-awesome/css/font-awesome.min.css">
         {{-- Ionicons --}}
-        <link rel="stylesheet" href="https://unpkg.com/ionicons/dist/css/ionicons.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/ionicons@2/css/ionicons.min.css">
         {{-- Theme style --}}
         <link rel="stylesheet" href="https://unpkg.com/admin-lte/dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="https://unpkg.com/admin-lte/dist/css/skins/skin-{{TMP_SKIN}}.min.css">
@@ -43,6 +43,8 @@
         @include('layouts.control-sidebar')
     @endcan
 
+    @include('layouts.flash_message')
+
 </div>
 {{-- ./wrapper --}}
 
@@ -59,8 +61,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
     {{-- AdminLTE App --}}
     <script src="https://unpkg.com/admin-lte/dist/js/app.min.js"></script>
-
-    @include('layouts.flash_message')
 @show
 
 </body>

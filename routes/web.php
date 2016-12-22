@@ -81,9 +81,9 @@ Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
 
 //Development Routes
 Route::get('trial', function () {
-    $user = Auth::user();
+    flash('Coba');
 
-    return view('trial', compact('user'));
+    return redirect('/');
 });
 
 Route::get('loginusing/{id}', function ($id) {

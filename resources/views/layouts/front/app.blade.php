@@ -27,7 +27,7 @@
         {{-- Font Awesome --}}
         <link rel="stylesheet" href="https://unpkg.com/font-awesome/css/font-awesome.min.css">
         {{-- Ionicons --}}
-        <link rel="stylesheet" href="https://unpkg.com/ionicons/dist/css/ionicons.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/ionicons@2/css/ionicons.min.css">
 
         {{-- Google Fonts --}}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -38,7 +38,6 @@
 
         {{-- CSS Custom --}}
         <link rel="stylesheet" href="{{asset('laraframe/main.css')}}">
-        <link rel="stylesheet" href="{{asset('laraframe/component.css')}}">
         <link rel="stylesheet" href="{{asset('laraframe/style.css')}}">
 
         <!-- Scripts -->
@@ -67,12 +66,8 @@
         {{-- end Main Wrapper --}}
 
         @include('layouts.front.footer')
+        @include('layouts.flash_message')
 
-    </div>
-    {{-- end Container Wrapper --}}
-
-    <div id="back-to-top" style="display: block;">
-        <a href="#"><i class="fa fa-angle-up"></i></a>
     </div>
 
     @section('script')
@@ -80,12 +75,10 @@
         {{--<script src="https://unpkg.com/vue@2/dist/vue.min.js"></script>--}}
         <script src="https://unpkg.com/vue@1/dist/vue.js"></script>
         <script src="https://unpkg.com/vue-resource/dist/vue-resource.min.js"></script>
-        <script src="https://unpkg.com/vue-strap@1/dist/vue-strap.min.js"></script>
+        <script src="https://unpkg.com/vue-strap@1.1.23/dist/vue-strap.min.js"></script>
 
         {{-- App JS --}}
         <script src="/js/front.js"></script>
-
-        @include('layouts.flash_message')
     @show
 </body>
 </html>
