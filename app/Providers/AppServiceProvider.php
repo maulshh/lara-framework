@@ -8,7 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *
@@ -19,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
         if (Schema::hasTable('settings')) {
             $settings = Setting::where('boot', true)->get();
             foreach ($settings as $setting) {
-                define(strtoupper($setting->name), $setting->value);
+                if (!defined(strtoupper($setting->name))) define(strtoupper($setting->name), $setting->value);
             }
         }
     }
