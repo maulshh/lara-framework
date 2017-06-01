@@ -10,7 +10,7 @@ Using <a href="https://laravel.com">laravel</a>, <a href="https://getbootstrap.c
 + Dynamic settings and easily customizable
 
 ### Prerequisite:
-+ Environment for <a href="https://laravel.com/docs/5.3/#server-requirements">laravel 5.3 </a> (PHP >= 5.6.4, ..)
++ Environment for <a href="https://laravel.com/docs/5.4/#server-requirements">laravel 5.4 </a> (PHP >= 5.6.4, ..)
 + PHP <a href="https://getcomposer.org">Composer</a> installed
 + Also <a href="https://nodejs.org/en/download">npm latest version</a> (npm v3.8.x and node 6.x.x)
 
@@ -41,9 +41,9 @@ git clone https://github.com/maulshh/lara-framework.git
    ```
    npm install
    ```
-   gulp dependencies
+   mix dependencies
    ```
-   gulp --production
+   npm run dev
    ```
 
 6. Serve your lara-frame on http://localhost:8000
@@ -52,5 +52,5 @@ git clone https://github.com/maulshh/lara-framework.git
    ```
 
 7. Username and password for each roles are:
-   + Webmaster : webmaster@bengkel.com / password
-   + Admin : admin@bengel.com / password
+   + Webmaster : webmaster@laraframe.com / password
+   + Admin : admin@laraframe.com / password

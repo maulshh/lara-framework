@@ -1,4 +1,4 @@
-<?php $roles = App\Users\Role::all(); ?>
+<?php $roles = App\Role::all(); ?>
 
 <form id="{{$form_id or "form-menu"}}" method="POST" action="{{url(isset($form_action) ? $form_action : 'admin/menu')}}">
 

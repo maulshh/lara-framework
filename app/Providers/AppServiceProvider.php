@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+		Schema::defaultStringLength(191);
         if (Schema::hasTable('settings')) {
             $settings = Setting::where('boot', true)->get();
             foreach ($settings as $setting) {
